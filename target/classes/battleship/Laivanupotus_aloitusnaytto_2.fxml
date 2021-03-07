@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="535.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="battleship.Aloitus2Controller">
+   <children>
+      <ImageView fitHeight="400.0" fitWidth="535.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Attack-on-carrier-USS-Franklin-19-March-1945-2016122105.jpg" />
+         </image>
+      </ImageView>
+      <VBox layoutY="100.0" prefHeight="250.0" prefWidth="535.0">
+         <children>
+            <Label text="Choose number of ships:">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="200.0" top="30.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ComboBox fx:id="destroyerAmount" prefWidth="150.0" promptText="Destroyer (size: 2)">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </ComboBox>
+                  <ComboBox fx:id="submarineAmount" prefWidth="150.0" promptText="Submarine (size: 3)">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </ComboBox>
+                  <ComboBox fx:id="cruiserAmount" prefWidth="150.0" promptText="Cruiser (size: 3)" />
+               </children>
+               <VBox.margin>
+                  <Insets left="35.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ComboBox fx:id="battleshipAmount" prefWidth="150.0" promptText="Battleship (size: 4)">
+                     <HBox.margin>
+                        <Insets left="100.0" />
+                     </HBox.margin>
+                  </ComboBox>
+                  <ComboBox fx:id="carrierAmount" prefWidth="150.0" promptText="Carrier (size: 5)">
+                     <HBox.margin>
+                        <Insets left="30.0" />
+                     </HBox.margin>
+                  </ComboBox>
+               </children>
+            </HBox>
+            <Button fx:id="confirmButton" mnemonicParsing="false" onAction="#confirm" text="Confirm">
+               <VBox.margin>
+                  <Insets left="235.0" top="70.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</Pane>
