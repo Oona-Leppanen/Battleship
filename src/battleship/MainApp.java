@@ -13,7 +13,7 @@ public class MainApp extends Application {
 		Parent root;
 		
 		try {
-			root=FXMLLoader.load(getClass().getResource("Laivanupotus_aloitusnaytto_2.fxml"));
+			root=FXMLLoader.load(getClass().getResource("Laivanupotus_aloitusnaytto_1.fxml"));
 		}
 		catch(Exception e) {
 			e.printStackTrace();
