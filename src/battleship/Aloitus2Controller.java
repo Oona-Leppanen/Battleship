@@ -2,8 +2,13 @@ package battleship;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.stage.Stage;
 
 public class Aloitus2Controller {
 
@@ -46,6 +51,19 @@ public class Aloitus2Controller {
     
     @FXML
     void confirm(ActionEvent event) {
-
-    }
+    	Node node = (Node) event.getSource(); // Tallennetaan nappi muuttujaan node
+    	Stage stage = (Stage) node.getScene().getWindow(); // Haetaan napin scene ja Scenen ikkuna eli Stage-> tallennetaan stage
+		Parent root;
+		
+		try {
+			root=FXMLLoader.load(getClass().getResource("Valiruutu.fxml"));
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return;
+		}
+		Scene scene= new Scene(root);
+		stage.setScene(scene); // asetetaan uusi Scene
+		stage.show(); // näytetään uusi scene
+	}
 }

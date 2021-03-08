@@ -2,9 +2,14 @@ package battleship;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class Aloitus1Controller {
 
@@ -33,12 +38,19 @@ public class Aloitus1Controller {
 
     @FXML
     void ButtonPressed(ActionEvent event) {
-    	try {
-        	System.out.println("Onneksi olkoon");
-
-    	}
-    	catch(Exception e) {
-    		e.printStackTrace();
-    	}
-    }
+    	Node node = (Node) event.getSource(); // Tallennetaan nappi muuttujaan node
+    	Stage stage = (Stage) node.getScene().getWindow(); // Haetaan napin scene ja Scenen ikkuna eli Stage-> tallennetaan stage
+		Parent root;
+		
+		try {
+			root=FXMLLoader.load(getClass().getResource("Laivanupotus_aloitusnaytto_2.fxml"));
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return;
+		}
+		Scene scene= new Scene(root);
+		stage.setScene(scene); // asetetaan uusi Scene
+		stage.show(); // näytetään uusi scene
+	}
 }

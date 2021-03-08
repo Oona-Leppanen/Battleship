@@ -13,7 +13,7 @@
    <children>
       <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../assets/SMS-Moltke-Hampton-Roads-1912-FINAL-2016052932.jpg" />
+            <Image url="@SMS-Moltke-Hampton-Roads-1912-FINAL-2016052932.jpg" />
          </image>
       </ImageView>
       <VBox layoutX="236.0" layoutY="62.0">
