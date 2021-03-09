@@ -7,11 +7,11 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
-
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="battleship.SijainnitController">
    <children>
@@ -40,13 +40,6 @@
                </font>
             </Label>
          </top>
-         <bottom>
-            <Button fx:id="continueButton2" mnemonicParsing="false" onAction="#Continue2" text="Continue" BorderPane.alignment="CENTER">
-               <BorderPane.margin>
-                  <Insets bottom="15.0" />
-               </BorderPane.margin>
-            </Button>
-         </bottom>
          <center>
             <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="340.0" BorderPane.alignment="CENTER">
                <children>
@@ -64,6 +57,18 @@
                </BorderPane.margin>
             </Pane>
          </center>
+         <bottom>
+            <HBox alignment="CENTER_RIGHT" prefHeight="68.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="resetButton" mnemonicParsing="false" onAction="#Reset" text="Reset" />
+                  <Button fx:id="continueButton2" mnemonicParsing="false" onAction="#Continue2" text="Continue">
+                     <HBox.margin>
+                        <Insets left="230.0" right="38.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </bottom>
       </BorderPane>
    </children>
 </Pane>
