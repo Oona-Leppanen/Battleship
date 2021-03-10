@@ -30,17 +30,17 @@
             </Label>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <ComboBox fx:id="destroyerAmount" prefWidth="150.0" promptText="Destroyer (size: 2)">
+                  <ComboBox fx:id="destroyerAmount" onAction="#checkValue" prefWidth="150.0" promptText="Destroyer (size: 2)">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
                   </ComboBox>
-                  <ComboBox fx:id="submarineAmount" prefWidth="150.0" promptText="Submarine (size: 3)">
+                  <ComboBox fx:id="submarineAmount" onAction="#checkValue" prefWidth="150.0" promptText="Submarine (size: 3)">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
                   </ComboBox>
-                  <ComboBox fx:id="cruiserAmount" prefWidth="150.0" promptText="Cruiser (size: 3)" />
+                  <ComboBox fx:id="cruiserAmount" onAction="#checkValue" prefWidth="150.0" promptText="Cruiser (size: 3)" />
                </children>
                <VBox.margin>
                   <Insets left="35.0" />
@@ -48,12 +48,12 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <ComboBox fx:id="battleshipAmount" prefWidth="150.0" promptText="Battleship (size: 4)">
+                  <ComboBox fx:id="battleshipAmount" onAction="#checkValue" prefWidth="150.0" promptText="Battleship (size: 4)">
                      <HBox.margin>
                         <Insets left="100.0" />
                      </HBox.margin>
                   </ComboBox>
-                  <ComboBox fx:id="carrierAmount" prefWidth="150.0" promptText="Carrier (size: 5)">
+                  <ComboBox fx:id="carrierAmount" onAction="#checkValue" prefWidth="150.0" promptText="Carrier (size: 5)">
                      <HBox.margin>
                         <Insets left="30.0" />
                      </HBox.margin>

@@ -38,12 +38,15 @@ public class Aloitus1Controller {
 
     @FXML
     void ButtonPressed(ActionEvent event) {
+    	Game game=new Game(p1Input.getText(), p2Input.getText(), widthChooser.getValue(), heightChooser.getValue());
+    	System.out.println(widthChooser.getValue()+","+heightChooser.getValue());
     	Node node = (Node) event.getSource(); // Tallennetaan nappi muuttujaan node
     	Stage stage = (Stage) node.getScene().getWindow(); // Haetaan napin scene ja Scenen ikkuna eli Stage-> tallennetaan stage
 		Parent root;
 		
 		try {
 			root=FXMLLoader.load(getClass().getResource("Laivanupotus_aloitusnaytto_2.fxml"));
+			stage.setUserData(game);
 		}
 		catch(Exception e) {
 			e.printStackTrace();

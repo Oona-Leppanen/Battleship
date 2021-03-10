@@ -9,6 +9,8 @@ public class Board {
 	Player p;
 
 	public Board(int boardSizeX, int boardSizeY, Player p) {
+		this.boardSizeX = boardSizeX;
+		this.boardSizeY = boardSizeY;
 		pelilauta = new int[boardSizeX][boardSizeY];
 		for (int i=0; i<boardSizeX; i++) {
 			for (int j=0; j<boardSizeY; j++) {
@@ -17,6 +19,7 @@ public class Board {
 		}
 		p = this.p;
 	}
+
 
 	public boolean legalSize() {
 		//Have to configure to adapt if both players have their own Board object (Divide by 2)
@@ -32,7 +35,7 @@ public class Board {
 		}
 		return false;
 	}
-	
+
 	//Need to add a counter variable here to manage when to return the boolean
 	public boolean willFit(Ship s, int x, int y) {
 		//Vertical check
@@ -73,7 +76,7 @@ public class Board {
 
 			}
 		}
-		
+
 		//Horizontal check
 		if (!s.vertical) {
 			//Anywhere in the middle
