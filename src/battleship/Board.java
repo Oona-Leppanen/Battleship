@@ -32,40 +32,86 @@ public class Board {
 		}
 		return false;
 	}
-	//willFit(3PitkäHorisonttiLaiva, 3, 4)
+	
+	//Need to add a counter variable here to manage when to return the boolean
 	public boolean willFit(Ship s, int x, int y) {
+		//Vertical check
+		if (s.vertical) {
+			//Anywhere in the middle
+			if ((s.size+y < boardSizeY) && ((x != 0) && (x != boardSizeX))) {
+				for (int i=x-1; i < x+1; i++) {
+					for (int j=y+1; j < y-s.size-1; j--) {
+						if (pelilauta[i][j] == 0) {
+							//Fix return
+							return true;
+						}
+					}
+				}
+			}
+			//Leftmost edge
+			if ((s.size+y < boardSizeY) && (x == 0)) {
+				for (int i=x; i < x+1; i++) {
+					for (int j=y+1; j < y-s.size-1; j--) {
+						if (pelilauta[i][j] == 0) {
+							//Fix return
+							return true;
+						}
+					}
+				}
+
+			}
+			//Rightmost edge
+			if ((s.size+y < boardSizeY) && (x == boardSizeX)) {
+				for (int i=x; i < x+1; i++) {
+					for (int j=y+1; j < y-s.size-1; j--) {
+						if (pelilauta[i][j] == 0) {
+							//Fix return
+							return true;
+						}
+					}
+				}
+
+			}
+		}
+		
 		//Horizontal check
 		if (!s.vertical) {
 			//Anywhere in the middle
-			if ((s.size+x < boardSizeX) && (x != 0)) {
-				//X-axis
-				for (int i=x-1; i < x+1; i++) {
-					//Y-axis
-					for (int j=y-1; j < y+1; j++) {
-						if (pelilauta[i][y] == 0) {
+			if ((s.size+x < boardSizeX) && ((y != 0) && (y != boardSizeY))) {
+				//Y-axis
+				for (int i=y-1; i < y+1; i++) {
+					//X-axis
+					for (int j=x-1; j < x+s.size+1; j++) {
+						if (pelilauta[i][j] == 0) {
+							//Fix return
+							return true;
+						}
+					}
+				}
+			}
+			//Check if the ship lies on the bottom edge
+			if ((s.size+x < boardSizeX) && (y == 0)) {
+				for (int i=y; i < y+1; i++) {
+					for (int j=x-1; j < x+s.size+1; j++) {
+						if (pelilauta[i][j] == 0) {
+							//Fix return
+							return true;
+						}
+					}
+				}
+			}
+			//Check if the ship lies on the top edge
+			if ((s.size+x < boardSizeX) && (y == boardSizeY)) {
+				for (int i=y; y < y-1; y--) {
+					for (int j=x-1; j < x+s.size+1; j++) {
+						if (pelilauta[i][j] == 0) {	
+							//Fix return
 							return true;
 						}
 					}
 				}
 			}
 		}
-		//Check if the ship lies on the leftmost edge
-		if (x == 0) {
-			for (int i=x; i < x+1; i++) {
-				for (int j=y-1; j < y+1; j++) {
-					if (pelilauta[i][y] == 0) {
-						return true;
-					}
-				}
-			}
-		}
-		if ((s.size+x < boardSizeX) && (x == boardSizeX)) {
-			//for (int i=x; i < x-1;)
-		}
-//		if ((!s.vertical && s.size+x > boardSizeX) || (s.vertical &&s.size+y > boardSizeY)) {
-//			
-//			return false;
-//		}
 		return false;
 	}
 
