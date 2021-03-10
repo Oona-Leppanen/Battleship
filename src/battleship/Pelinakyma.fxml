@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="battleship.PelinakymaController">
    <children>
       <BorderPane prefHeight="500.0" prefWidth="600.0">
@@ -60,7 +59,7 @@
                         <Insets left="35.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="continueButton3" mnemonicParsing="false" onAction="#Continue3" text="Continue">
+                  <Button fx:id="continueButton" mnemonicParsing="false" onAction="#Continue" text="Continue">
                      <HBox.margin>
                         <Insets left="195.0" />
                      </HBox.margin>

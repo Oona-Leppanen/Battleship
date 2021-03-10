@@ -61,7 +61,7 @@
             <HBox alignment="CENTER_RIGHT" prefHeight="68.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <children>
                   <Button fx:id="resetButton" mnemonicParsing="false" onAction="#Reset" text="Reset" />
-                  <Button fx:id="continueButton2" mnemonicParsing="false" onAction="#Continue2" text="Continue">
+                  <Button fx:id="continueButton" mnemonicParsing="false" onAction="#Continue" text="Continue">
                      <HBox.margin>
                         <Insets left="230.0" right="38.0" />
                      </HBox.margin>

@@ -9,7 +9,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-public class ValiruutuController {
+public class PelinakymaController {
+
+    @FXML
+    private Button quitButton;
 
     @FXML
     private Button continueButton;
@@ -21,7 +24,7 @@ public class ValiruutuController {
 		Parent root;
 		
 		try {
-			root=FXMLLoader.load(getClass().getResource("Pelinakyma.fxml"));
+			root=FXMLLoader.load(getClass().getResource("Valiruutu.fxml"));
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -31,4 +34,12 @@ public class ValiruutuController {
 		stage.setScene(scene); // asetetaan uusi Scene
 		stage.show(); // näytetään uusi scene
 	}
+
+    @FXML
+    void Quit(ActionEvent event) {
+    	Node node = (Node) event.getSource(); //Tallennetaan nappi muuttujaan node
+    	Stage stage = (Stage) node.getScene().getWindow(); //Haetaan napin scen ja Scenen ikkuna eli Stage -> tallennetaan stage
+    	stage.close();
+    }
+
 }

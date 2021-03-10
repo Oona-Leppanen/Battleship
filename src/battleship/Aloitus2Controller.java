@@ -56,7 +56,7 @@ public class Aloitus2Controller {
 		Parent root;
 		
 		try {
-			root=FXMLLoader.load(getClass().getResource("Valiruutu.fxml"));
+			root=FXMLLoader.load(getClass().getResource("Aluksien sijainnit.fxml"));
 		}
 		catch(Exception e) {
 			e.printStackTrace();
