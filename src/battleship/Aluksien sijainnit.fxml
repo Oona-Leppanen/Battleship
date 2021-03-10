@@ -41,7 +41,7 @@
             </Label>
          </top>
          <center>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="340.0" BorderPane.alignment="CENTER">
+            <Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="340.0" BorderPane.alignment="CENTER">
                <children>
                   <ImageView fitHeight="340.0" fitWidth="340.0" pickOnBounds="true" preserveRatio="true">
                      <image>
