@@ -7,21 +7,28 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class ValiruutuController {
+public class LoppuController {
 
     @FXML
-    private Button continueButton;
+    private Button quitButton;
 
     @FXML
-    void Continue(ActionEvent event) {
+    private Button newButton;
+
+    @FXML
+    private Label winnerLabel;
+
+    @FXML
+    void NewGame(ActionEvent event) {
     	Node node = (Node) event.getSource(); // Tallennetaan nappi muuttujaan node
     	Stage stage = (Stage) node.getScene().getWindow(); // Haetaan napin scene ja Scenen ikkuna eli Stage-> tallennetaan stage
 		Parent root;
 		
 		try {
-			root=FXMLLoader.load(getClass().getResource("Loppu.fxml"));
+			root=FXMLLoader.load(getClass().getResource("Laivanupotus_aloitusnaytto_1.fxml"));
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -31,4 +38,12 @@ public class ValiruutuController {
 		stage.setScene(scene); // asetetaan uusi Scene
 		stage.show(); // näytetään uusi scene
 	}
+
+    @FXML
+    void Quit(ActionEvent event) {
+    	Node node = (Node) event.getSource(); //Tallennetaan nappi muuttujaan node
+    	Stage stage = (Stage) node.getScene().getWindow(); //Haetaan napin scen ja Scenen ikkuna eli Stage -> tallennetaan stage
+    	stage.close();
+    }
+
 }
