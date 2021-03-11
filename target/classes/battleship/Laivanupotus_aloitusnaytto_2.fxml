@@ -60,7 +60,7 @@
                   </ComboBox>
                </children>
             </HBox>
-            <Label fx:id="alertLabel" text="(Choose a number for each ship)" textFill="RED">
+            <Label fx:id="alertLabel" text="Choose a number for each ship" textFill="RED">
                <font>
                   <Font size="18.0" />
                </font>

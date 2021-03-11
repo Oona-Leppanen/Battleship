@@ -64,11 +64,18 @@ public class Aloitus2Controller {
 		if(destroyerAmount.getValue()!=null && submarineAmount.getValue()!=null && cruiserAmount.getValue()!=null && battleshipAmount.getValue()!=null && carrierAmount.getValue()!=null) {
 			int area= game.playerBoard1.boardSizeX*game.playerBoard1.boardSizeY;
 			int ships= destroyerAmount.getValue()*2+submarineAmount.getValue()*3+cruiserAmount.getValue()*3+battleshipAmount.getValue()*4+carrierAmount.getValue()*5;
-			if(area>2*ships) {
+			if(area>2*ships && (destroyerAmount.getValue()>=1 || submarineAmount.getValue()>=1 || cruiserAmount.getValue()>=1 || battleshipAmount.getValue()>=1 || carrierAmount.getValue()>=1)) {
 				confirmButton.setDisable(false);
 				System.out.println("area");
 				alertLabel.setText("");
 			}
+			
+			else if(area>2*ships && destroyerAmount.getValue()==0 && submarineAmount.getValue()==0 && cruiserAmount.getValue()==0 && battleshipAmount.getValue()==0 && carrierAmount.getValue()==0) {
+				confirmButton.setDisable(true);
+				System.out.println("area");
+				alertLabel.setText("Choose at least one ship");
+			}
+			
 			else if(area<=2*ships){
 				confirmButton.setDisable(true);
 				System.out.println("ships");
