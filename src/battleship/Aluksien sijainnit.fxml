@@ -21,11 +21,43 @@
                   <Insets left="25.0" />
                </BorderPane.margin>
                <children>
-                  <Pane prefHeight="200.0" prefWidth="200.0" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" />
+                  <Pane maxHeight="-Infinity" prefHeight="200.222" prefWidth="200.0" style="-fx-background-color: lightgrey;">
+                     <VBox.margin>
+                        <Insets bottom="3.0" />
+                     </VBox.margin>
+                     <children>
+                        <Label text="Destroyer" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.222" prefWidth="200.0" style="-fx-background-color: lightgrey;">
+                     <VBox.margin>
+                        <Insets bottom="3.0" />
+                     </VBox.margin>
+                     <children>
+                        <Label text="Submarine" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgrey;">
+                     <VBox.margin>
+                        <Insets bottom="3.0" />
+                     </VBox.margin>
+                     <children>
+                        <Label text="Cruiser" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgrey;">
+                     <VBox.margin>
+                        <Insets bottom="3.0" />
+                     </VBox.margin>
+                     <children>
+                        <Label text="Battleship" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgrey;">
+                     <children>
+                        <Label text="Carrier" />
+                     </children>
+                  </Pane>
                </children>
             </VBox>
          </left>
