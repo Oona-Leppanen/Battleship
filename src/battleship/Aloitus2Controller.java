@@ -14,7 +14,6 @@ import javafx.stage.Stage;
 public class Aloitus2Controller {
 
 	private Game game;
-	private boolean readyCheck=true;
 	@FXML
 	private ComboBox<Integer> destroyerAmount;
 
@@ -37,6 +36,8 @@ public class Aloitus2Controller {
 	private Button confirmButton;
 
 	public void initialize() {
+		GameHolder holder=GameHolder.getInstance();
+		game= holder.getGame();
 		confirmButton.setDisable(true);
 		for(int i=0; i<6; i++) {
 			destroyerAmount.getItems().add(i);
@@ -58,14 +59,8 @@ public class Aloitus2Controller {
 
 	@FXML
 	void checkValue(ActionEvent event) {
-		if (readyCheck) {
-			Node node = (Node) event.getSource(); // Tallennetaan nappi muuttujaan node
-			Stage stage = (Stage) node.getScene().getWindow(); 
-			this.game = (Game) stage.getUserData();
-			readyCheck=false;
-			alertLabel.setText("Choose a number for each ship");
-		}
-
+		alertLabel.setText("Choose a number for each ship");
+		
 		if(destroyerAmount.getValue()!=null && submarineAmount.getValue()!=null && cruiserAmount.getValue()!=null && battleshipAmount.getValue()!=null && carrierAmount.getValue()!=null) {
 			int area= game.playerBoard1.boardSizeX*game.playerBoard1.boardSizeY;
 			int ships= destroyerAmount.getValue()*2+submarineAmount.getValue()*3+cruiserAmount.getValue()*3+battleshipAmount.getValue()*4+carrierAmount.getValue()*5;

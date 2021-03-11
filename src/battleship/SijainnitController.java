@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 
 public class SijainnitController {
 
-	private int continuePresses=0;
+	private Game game;
 
 	@FXML
 	private Pane pane;
@@ -27,10 +27,12 @@ public class SijainnitController {
 	private Button continueButton;
 
 	public void initialize(){
+		GameHolder holder=GameHolder.getInstance();
+		game=holder.getGame();
 		GridPane gp=new GridPane();
-		for(int i=0; i<10;i++) {
-			for(int j=0;j<10;j++) {
-				Rectangle r= new Rectangle(34,34,Color.WHITE);
+		for(int i=0; i<game.sizeX;i++) {
+			for(int j=0;j<game.sizeY;j++) {
+				Rectangle r= new Rectangle(340/game.sizeX,340/game.sizeY,Color.WHITE);
 				r.setStroke(Color.BLACK);
 				r.setOpacity(0.5);
 				GridPane.setConstraints(r, i, j); // column=0 row=0
@@ -42,11 +44,10 @@ public class SijainnitController {
 
 	@FXML
 	void Continue(ActionEvent event) {
-		/*if(continuePresses==0) {
-			Node node = (Node) event.getSource(); // Tallennetaan nappi muuttujaan node
-			Stage stage = (Stage) node.getScene().getWindow(); // Haetaan napin scene ja Scenen ikkuna eli Stage-> tallennetaan stage
+		Node node = (Node) event.getSource(); // Tallennetaan nappi muuttujaan node
+		Stage stage = (Stage) node.getScene().getWindow(); // Haetaan napin scene ja Scenen ikkuna eli Stage-> tallennetaan stage
+		if(!game.board1set) {
 			Parent root;
-
 			try {
 				root=FXMLLoader.load(getClass().getResource("Aluksien sijainnit.fxml"));
 			}
@@ -57,23 +58,22 @@ public class SijainnitController {
 			Scene scene= new Scene(root);
 			stage.setScene(scene); // asetetaan uusi Scene
 			stage.show(); // näytetään uusi scene
+			game.board1set=true;
 		}
-		else {*/
-		Node node = (Node) event.getSource(); // Tallennetaan nappi muuttujaan node
-		Stage stage = (Stage) node.getScene().getWindow(); // Haetaan napin scene ja Scenen ikkuna eli Stage-> tallennetaan stage
-		Parent root;
+		else {
+			Parent root;
 
-		try {
-			root=FXMLLoader.load(getClass().getResource("Valiruutu.fxml"));
+			try {
+				root=FXMLLoader.load(getClass().getResource("Valiruutu.fxml"));
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+				return;
+			}
+			Scene scene= new Scene(root);
+			stage.setScene(scene); // asetetaan uusi Scene
+			stage.show(); // näytetään uusi scene
 		}
-		catch(Exception e) {
-			e.printStackTrace();
-			return;
-		}
-		Scene scene= new Scene(root);
-		stage.setScene(scene); // asetetaan uusi Scene
-		stage.show(); // näytetään uusi scene
-		//}
 	}
 
 	@FXML

@@ -43,10 +43,11 @@ public class Aloitus1Controller {
     	Node node = (Node) event.getSource(); // Tallennetaan nappi muuttujaan node
     	Stage stage = (Stage) node.getScene().getWindow(); // Haetaan napin scene ja Scenen ikkuna eli Stage-> tallennetaan stage
 		Parent root;
+	    GameHolder holder = GameHolder.getInstance();
+	    holder.setGame(game);
 		
 		try {
 			root=FXMLLoader.load(getClass().getResource("Laivanupotus_aloitusnaytto_2.fxml"));
-			stage.setUserData(game);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
