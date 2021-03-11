@@ -62,7 +62,6 @@ public class Aloitus2Controller {
 		}
 		if(destroyerAmount.getValue()!=null && submarineAmount.getValue()!=null && cruiserAmount.getValue()!=null && battleshipAmount.getValue()!=null && carrierAmount.getValue()!=null) {
 			int area= game.playerBoard1.boardSizeX*game.playerBoard1.boardSizeY;
-			System.out.println(game.playerBoard1.boardSizeX+","+game.playerBoard2.boardSizeY);
 			int ships= destroyerAmount.getValue()*2+submarineAmount.getValue()*3+cruiserAmount.getValue()*3+battleshipAmount.getValue()*4+carrierAmount.getValue()*5;
 			if(area>2*ships) {
 				confirmButton.setDisable(false);
