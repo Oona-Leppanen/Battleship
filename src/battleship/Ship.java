@@ -7,10 +7,11 @@ public class Ship {
 	boolean alive = true;
 	boolean vertical = true;
 
-	public Ship (int size) {
-		size = this.size;
-	}
-
+	public Ship (int size, boolean vertical) {
+        this.size = size;
+        this.vertical = vertical;
+    }
+	
 	int getSize() {
 		return this.size;
 	}

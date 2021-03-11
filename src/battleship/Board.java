@@ -20,7 +20,6 @@ public class Board {
 		p = this.p;
 	}
 
-
 	public boolean legalSize() {
 		//Have to configure to adapt if both players have their own Board object (Divide by 2)
 		if (boardSizeX * boardSizeY > shipsOnBoard) {
@@ -36,86 +35,55 @@ public class Board {
 		return false;
 	}
 
-	//Need to add a counter variable here to manage when to return the boolean
 	public boolean willFit(Ship s, int x, int y) {
-		//Vertical check
 		if (s.vertical) {
-			//Anywhere in the middle
-			if ((s.size+y < boardSizeY) && ((x != 0) && (x != boardSizeX))) {
-				for (int i=x-1; i < x+1; i++) {
-					for (int j=y+1; j < y-s.size-1; j--) {
-						if (pelilauta[i][j] == 0) {
-							//Fix return
-							return true;
+			if (s.size+y < boardSizeY) {
+				for (int i=x-1; i <= x+1; i++) {
+					if ( (i < 0) || (i > boardSizeX) ) {
+						continue;
+					}
+					for (int j=y-1; j < y+s.size+1; j++) {
+						if ( (j < 0 ) || (j > boardSizeY) ) {
+							continue;
+						}
+						if (pelilauta[i][j] == 1) {
+							System.out.println("ei muuten mahdu");
+							return false;
 						}
 					}
 				}
-			}
-			//Leftmost edge
-			if ((s.size+y < boardSizeY) && (x == 0)) {
-				for (int i=x; i < x+1; i++) {
-					for (int j=y+1; j < y-s.size-1; j--) {
-						if (pelilauta[i][j] == 0) {
-							//Fix return
-							return true;
-						}
-					}
-				}
-
-			}
-			//Rightmost edge
-			if ((s.size+y < boardSizeY) && (x == boardSizeX)) {
-				for (int i=x; i < x+1; i++) {
-					for (int j=y+1; j < y-s.size-1; j--) {
-						if (pelilauta[i][j] == 0) {
-							//Fix return
-							return true;
-						}
-					}
-				}
-
+			} else {
+			System.out.println("ei mahdu laudalle");
+			return false;
 			}
 		}
-
-		//Horizontal check
 		if (!s.vertical) {
-			//Anywhere in the middle
-			if ((s.size+x < boardSizeX) && ((y != 0) && (y != boardSizeY))) {
-				//Y-axis
-				for (int i=y-1; i < y+1; i++) {
-					//X-axis
+			if (s.size+x < boardSizeX) {
+				for (int i=y-1; i <= y+1; i++) {
+					if ( (i<0) || (i > boardSizeY) ) {
+						//						System.out.println("i = " + i);
+						continue;
+					}
 					for (int j=x-1; j < x+s.size+1; j++) {
-						if (pelilauta[i][j] == 0) {
-							//Fix return
-							return true;
+						if ( (j < 0) || (j > boardSizeX) ) {
+							//							System.out.println("j = " + j);
+							continue;
+						}
+						//						System.out.println("(" + j +"," + i + ")");
+						if (pelilauta[j][i] == 1) {
+							System.out.println("ei muuten mahdu");
+							return false;
 						}
 					}
 				}
-			}
-			//Check if the ship lies on the bottom edge
-			if ((s.size+x < boardSizeX) && (y == 0)) {
-				for (int i=y; i < y+1; i++) {
-					for (int j=x-1; j < x+s.size+1; j++) {
-						if (pelilauta[i][j] == 0) {
-							//Fix return
-							return true;
-						}
-					}
-				}
-			}
-			//Check if the ship lies on the top edge
-			if ((s.size+x < boardSizeX) && (y == boardSizeY)) {
-				for (int i=y; y < y-1; y--) {
-					for (int j=x-1; j < x+s.size+1; j++) {
-						if (pelilauta[i][j] == 0) {	
-							//Fix return
-							return true;
-						}
-					}
-				}
+			} else {
+			System.out.println("ei mahdu laudalle");
+			return false;
 			}
 		}
-		return false;
+
+		System.out.println("Kyllä mahtuu");
+		return true;
 	}
 
 	public void setAShip(Ship s, int x, int y) {
@@ -130,8 +98,8 @@ public class Board {
 				}
 			}
 			//Will have to adjust to GUI, placeholder print line
+		} else {
 			System.out.println("Ei muuten mahdu");
 		}
 	}
-
 }
