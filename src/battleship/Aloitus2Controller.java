@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class Aloitus2Controller {
@@ -28,6 +29,9 @@ public class Aloitus2Controller {
 
 	@FXML
 	private ComboBox<Integer> carrierAmount;
+
+	@FXML
+	private Label alertLabel;
 
 	@FXML
 	private Button confirmButton;
@@ -59,17 +63,21 @@ public class Aloitus2Controller {
 			Stage stage = (Stage) node.getScene().getWindow(); 
 			this.game = (Game) stage.getUserData();
 			readyCheck=false;
+			alertLabel.setText("Choose a number for each ship");
 		}
+
 		if(destroyerAmount.getValue()!=null && submarineAmount.getValue()!=null && cruiserAmount.getValue()!=null && battleshipAmount.getValue()!=null && carrierAmount.getValue()!=null) {
 			int area= game.playerBoard1.boardSizeX*game.playerBoard1.boardSizeY;
 			int ships= destroyerAmount.getValue()*2+submarineAmount.getValue()*3+cruiserAmount.getValue()*3+battleshipAmount.getValue()*4+carrierAmount.getValue()*5;
 			if(area>2*ships) {
 				confirmButton.setDisable(false);
 				System.out.println("area");
+				alertLabel.setText("");
 			}
 			else if(area<=2*ships){
 				confirmButton.setDisable(true);
 				System.out.println("ships");
+				alertLabel.setText("Too many ships");
 			}
 		}
 	}

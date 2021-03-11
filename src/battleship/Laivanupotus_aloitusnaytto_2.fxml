@@ -18,14 +18,14 @@
             <Image url="@Attack-on-carrier-USS-Franklin-19-March-1945-2016122105.jpg" />
          </image>
       </ImageView>
-      <VBox layoutY="100.0" prefHeight="250.0" prefWidth="535.0">
+      <VBox alignment="CENTER" layoutY="100.0" prefHeight="257.0" prefWidth="535.0">
          <children>
-            <Label text="Choose number of ships:">
+            <Label prefHeight="27.0" prefWidth="199.0" text="Choose number of ships:">
                <VBox.margin>
-                  <Insets bottom="20.0" left="200.0" top="30.0" />
+                  <Insets bottom="20.0" top="20.0" />
                </VBox.margin>
                <font>
-                  <Font size="14.0" />
+                  <Font size="18.0" />
                </font>
             </Label>
             <HBox prefHeight="100.0" prefWidth="200.0">
@@ -60,9 +60,17 @@
                   </ComboBox>
                </children>
             </HBox>
+            <Label fx:id="alertLabel" text="(Choose a number for each ship)" textFill="RED">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Label>
             <Button fx:id="confirmButton" mnemonicParsing="false" onAction="#confirm" text="Confirm">
                <VBox.margin>
-                  <Insets left="235.0" top="70.0" />
+                  <Insets top="60.0" />
                </VBox.margin>
             </Button>
          </children>
