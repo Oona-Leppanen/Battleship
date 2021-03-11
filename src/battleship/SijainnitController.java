@@ -30,9 +30,16 @@ public class SijainnitController {
 		GameHolder holder=GameHolder.getInstance();
 		game=holder.getGame();
 		GridPane gp=new GridPane();
+		int x;
+		if(game.sizeX>game.sizeY) {
+			x=game.sizeX;
+		}
+		else {
+			x=game.sizeY;
+		}
 		for(int i=0; i<game.sizeX;i++) {
 			for(int j=0;j<game.sizeY;j++) {
-				Rectangle r= new Rectangle(340/game.sizeX,340/game.sizeY,Color.WHITE);
+				Rectangle r= new Rectangle(330/x,330/x,Color.WHITE);
 				r.setStroke(Color.BLACK);
 				r.setOpacity(0.5);
 				GridPane.setConstraints(r, i, j); // column=0 row=0

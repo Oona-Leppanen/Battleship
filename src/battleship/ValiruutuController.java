@@ -21,7 +21,7 @@ public class ValiruutuController {
 		Parent root;
 		
 		try {
-			root=FXMLLoader.load(getClass().getResource("Loppu.fxml"));
+			root=FXMLLoader.load(getClass().getResource("Pelinakyma.fxml"));
 		}
 		catch(Exception e) {
 			e.printStackTrace();

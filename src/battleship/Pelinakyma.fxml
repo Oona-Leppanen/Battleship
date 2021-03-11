@@ -14,7 +14,7 @@
    <children>
       <BorderPane prefHeight="500.0" prefWidth="600.0">
          <right>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="250.0" prefWidth="250.0" BorderPane.alignment="CENTER">
+            <Pane fx:id="playerBoard" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="250.0" prefWidth="250.0" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets right="14.0" />
                </BorderPane.margin>
@@ -28,7 +28,7 @@
             </Pane>
          </right>
          <left>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="310.0" prefWidth="310.0" BorderPane.alignment="CENTER">
+            <Pane fx:id="opponentBoard" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="310.0" prefWidth="310.0" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets left="14.0" />
                </BorderPane.margin>
