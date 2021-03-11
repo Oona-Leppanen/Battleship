@@ -6,26 +6,28 @@ public class Ship {
 	int hits = 0;
 	boolean alive = true;
 	boolean vertical = true;
+	int coordX;
+	int coordY;
 
 	public Ship (int size, boolean vertical) {
         this.size = size;
         this.vertical = vertical;
     }
-	
-	int getSize() {
-		return this.size;
-	}
 
 	boolean isAlive() {
 		if (hits == size) {
-			this.alive = false;
-			return this.alive;
+			alive = false;
+			return alive;
 		}
-		return this.alive;
+		return alive;
+	}
+	
+	void coordinates(int x, int y) {
+		this.coordX =  x;
+		this.coordY =  y;
 	}
 
 	void gotHit() {
 		this.hits += 1;
 	}
 }
-

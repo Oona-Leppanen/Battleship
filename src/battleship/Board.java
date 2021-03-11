@@ -25,18 +25,38 @@ public class Board {
 		}
 		return false;
 	}
-
+	
+	public void deleteAShip(Ship s) {
+		if (!s.isAlive()) {
+			if (s.vertical) {
+				for (int i=s.coordX; i < s.coordX+s.size; i++) {
+					for (int j=s.coordY; j < s.coordY+s.size; j++) {
+						pelilauta[i][j] = 0;
+					}
+				}
+			}
+			if (!s.vertical) {
+				for (int i=s.coordY; i < s.coordY+s.size; i++) {
+					for (int j=s.coordX; j < s.coordX+s.size; j++) {
+						pelilauta[j][i] = 0;
+					}
+				}
+			}
+		}
+	}
+	
 	public boolean willFit(Ship s, int x, int y) {
 		if (s.vertical) {
-			if (s.size+y < boardSizeY) {
+			if (s.size+y <= boardSizeY) {
 				for (int i=x-1; i <= x+1; i++) {
-					if ( (i < 0) || (i > boardSizeX) ) {
+					if ( (i < 0) || (i >= boardSizeX) ) {
 						continue;
 					}
 					for (int j=y-1; j < y+s.size+1; j++) {
-						if ( (j < 0 ) || (j > boardSizeY) ) {
+						if ( (j < 0 ) || (j >= boardSizeY) ) {
 							continue;
 						}
+//						System.out.println(i + " and " + j);
 						if (pelilauta[i][j] == 1) {
 							System.out.println("ei muuten mahdu");
 							return false;
@@ -49,18 +69,18 @@ public class Board {
 			}
 		}
 		if (!s.vertical) {
-			if (s.size+x < boardSizeX) {
+			if (s.size+x <= boardSizeX) {
 				for (int i=y-1; i <= y+1; i++) {
-					if ( (i<0) || (i > boardSizeY) ) {
+					if ( (i<0) || (i >= boardSizeY) ) {
 						//						System.out.println("i = " + i);
 						continue;
 					}
 					for (int j=x-1; j < x+s.size+1; j++) {
-						if ( (j < 0) || (j > boardSizeX) ) {
+						if ( (j < 0) || (j >= boardSizeX) ) {
 							//							System.out.println("j = " + j);
 							continue;
 						}
-						//						System.out.println("(" + j +"," + i + ")");
+//						System.out.println(j + " and " + i);
 						if (pelilauta[j][i] == 1) {
 							System.out.println("ei muuten mahdu");
 							return false;
@@ -79,9 +99,10 @@ public class Board {
 
 	public void setAShip(Ship s, int x, int y) {
 		if (willFit(s,x,y)) {
+			s.coordinates(x, y);
 			if (s.vertical) {
 				for (int i=0; i<s.size; i++) {
-					pelilauta[x][y+1] = 1;
+					pelilauta[x][y+i] = 1;
 				}
 			} else {
 				for (int i=0; i<s.size; i++) {
@@ -92,5 +113,17 @@ public class Board {
 		} else {
 			System.out.println("Ei muuten mahdu");
 		}
+	}
+	
+	public boolean lost(Board b) {
+		for (int i = 0; i < b.boardSizeX; i++) {
+			for (int j=0; j < b.boardSizeY; j++) {
+				b.pelilauta[i][j] = 1;
+				System.out.println("Et hävinnyt");
+				return false;
+			}
+		}
+		System.out.println("Hävisit pelin");
+		return true;
 	}
 }
