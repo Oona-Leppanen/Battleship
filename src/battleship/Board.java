@@ -5,7 +5,6 @@ public class Board {
 	int boardSizeX;
 	int boardSizeY;
 	int[][] pelilauta;
-	int shipsOnBoard;
 	Player p;
 
 	public Board(int boardSizeX, int boardSizeY, Player p) {
@@ -18,14 +17,6 @@ public class Board {
 			}
 		}
 		p = this.p;
-	}
-
-	public boolean legalSize() {
-		//Have to configure to adapt if both players have their own Board object (Divide by 2)
-		if (boardSizeX * boardSizeY > shipsOnBoard) {
-			return true;
-		}
-		return false;
 	}
 
 	public boolean hasAShip(int x, int y) {
