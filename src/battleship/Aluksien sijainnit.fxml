@@ -91,10 +91,15 @@
          <bottom>
             <HBox alignment="CENTER_RIGHT" prefHeight="68.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <children>
+                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#Back" text="Back">
+                     <HBox.margin>
+                        <Insets right="25.0" />
+                     </HBox.margin>
+                  </Button>
                   <Button fx:id="resetButton" mnemonicParsing="false" onAction="#Reset" text="Reset" />
                   <Button fx:id="continueButton" mnemonicParsing="false" onAction="#Continue" text="Continue">
                      <HBox.margin>
-                        <Insets left="230.0" right="38.0" />
+                        <Insets left="163.0" right="38.0" />
                      </HBox.margin>
                   </Button>
                </children>

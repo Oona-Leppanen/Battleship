@@ -68,11 +68,19 @@
                   <Insets />
                </VBox.margin>
             </Label>
-            <Button fx:id="confirmButton" mnemonicParsing="false" onAction="#confirm" text="Confirm">
-               <VBox.margin>
-                  <Insets top="60.0" />
-               </VBox.margin>
-            </Button>
+            <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#Back" text="Back">
+                     <HBox.margin>
+                        <Insets right="130.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="confirmButton" mnemonicParsing="false" onAction="#Confirm" text="Confirm" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </HBox>
          </children>
       </VBox>
    </children>

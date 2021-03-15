@@ -19,6 +19,9 @@ public class SijainnitController {
 
 	@FXML
 	private Pane pane;
+	
+    @FXML
+    private Button backButton;
 
 	@FXML
 	private Button resetButton;
@@ -100,4 +103,23 @@ public class SijainnitController {
 		stage.setScene(scene); // asetetaan uusi Scene
 		stage.show(); // näytetään uusi scene
 	}
+	
+	@FXML
+    void Back(ActionEvent event) {
+		Node node = (Node) event.getSource(); // Tallennetaan nappi muuttujaan node
+		Stage stage = (Stage) node.getScene().getWindow(); // Haetaan napin scene ja Scenen ikkuna eli Stage-> tallennetaan stage
+		Parent root;
+
+		try {
+			root=FXMLLoader.load(getClass().getResource("Laivanupotus_aloitusnaytto_2.fxml"));
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return;
+		}
+		Scene scene= new Scene(root);
+		stage.setScene(scene); // asetetaan uusi Scene
+		stage.show(); // näytetään uusi scene
+		game.board1set=false;
+    }
 }

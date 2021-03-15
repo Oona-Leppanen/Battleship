@@ -33,6 +33,9 @@ public class Aloitus2Controller {
 	private Label alertLabel;
 
 	@FXML
+	private Button backButton;
+
+	@FXML
 	private Button confirmButton;
 
 	public void initialize() {
@@ -60,7 +63,7 @@ public class Aloitus2Controller {
 	@FXML
 	void checkValue(ActionEvent event) {
 		alertLabel.setText("Choose a number for each ship");
-		
+
 		if(destroyerAmount.getValue()!=null && submarineAmount.getValue()!=null && cruiserAmount.getValue()!=null && battleshipAmount.getValue()!=null && carrierAmount.getValue()!=null) {
 			int area= game.playerBoard1.boardSizeX*game.playerBoard1.boardSizeY;
 			int ships= destroyerAmount.getValue()*2+submarineAmount.getValue()*3+cruiserAmount.getValue()*3+battleshipAmount.getValue()*4+carrierAmount.getValue()*5;
@@ -69,13 +72,13 @@ public class Aloitus2Controller {
 				System.out.println("area");
 				alertLabel.setText("");
 			}
-			
+
 			else if(area>2*ships && destroyerAmount.getValue()==0 && submarineAmount.getValue()==0 && cruiserAmount.getValue()==0 && battleshipAmount.getValue()==0 && carrierAmount.getValue()==0) {
 				confirmButton.setDisable(true);
 				System.out.println("area");
 				alertLabel.setText("Choose at least one ship");
 			}
-			
+
 			else if(area<=2*ships){
 				confirmButton.setDisable(true);
 				System.out.println("ships");
@@ -85,7 +88,25 @@ public class Aloitus2Controller {
 	}
 
 	@FXML
-	void confirm(ActionEvent event) {
+	void Back(ActionEvent event) {
+		Node node = (Node) event.getSource(); // Tallennetaan nappi muuttujaan node
+		Stage stage = (Stage) node.getScene().getWindow(); // Haetaan napin scene ja Scenen ikkuna eli Stage-> tallennetaan stage
+		Parent root;
+
+		try {
+			root=FXMLLoader.load(getClass().getResource("Laivanupotus_aloitusnaytto_1.fxml"));
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return;
+		}
+		Scene scene= new Scene(root);
+		stage.setScene(scene); // asetetaan uusi Scene
+		stage.show(); // näytetään uusi scene
+	}
+
+	@FXML
+	void Confirm(ActionEvent event) {
 		Node node = (Node) event.getSource(); // Tallennetaan nappi muuttujaan node
 		Stage stage = (Stage) node.getScene().getWindow(); // Haetaan napin scene ja Scenen ikkuna eli Stage-> tallennetaan stage
 		Parent root;
