@@ -7,10 +7,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+//import javafx.scene.paint.Color;
+//import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class SijainnitController {
@@ -19,6 +21,9 @@ public class SijainnitController {
 
 	@FXML
 	private Pane pane;
+	
+	//@FXML
+    //private ImageView image;
 	
     @FXML
     private Button backButton;
@@ -33,6 +38,12 @@ public class SijainnitController {
 		GameHolder holder=GameHolder.getInstance();
 		game=holder.getGame();
 		GridPane gp=new GridPane();
+		//Class<?> clazz = MyClass.class;
+		//InputStream input = clazz.getResourceAsStream("/org/o7planning/javafx/icon/java-32.png");
+		//Image image=new Image(this.getClass().getResource("./battleship/Sea view4.jpg"));
+		Image image=new Image(getClass().getResource("Sea view4.jpg").toExternalForm());
+		//("Sea view4.jpg");//
+		
 		int x;
 		if(game.sizeX>game.sizeY) {
 			x=game.sizeX;
@@ -42,11 +53,19 @@ public class SijainnitController {
 		}
 		for(int i=0; i<game.sizeX;i++) {
 			for(int j=0;j<game.sizeY;j++) {
-				Rectangle r= new Rectangle(330/x,330/x,Color.WHITE);
-				r.setStroke(Color.BLACK);
-				r.setOpacity(0.5);
-				GridPane.setConstraints(r, i, j); // column=0 row=0
-				gp.getChildren().add(r);
+				ImageView view;
+				view=new ImageView(image);
+				view.setFitWidth(330/x);
+				view.setFitHeight(330/x);
+				//view.setPreserveRatio(true);
+				//view.setSmooth(true);
+				//view.setCache(true);
+				//Rectangle r= new Rectangle(330/x,330/x,Color.WHITE);
+				//r.setStroke(Color.BLACK);
+				//r.setOpacity(0.5);
+				
+				GridPane.setConstraints(view, i, j); // column=0 row=0
+				gp.getChildren().add(view);//r
 			}
 		}
 		pane.getChildren().add(gp);
