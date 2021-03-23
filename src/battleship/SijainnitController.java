@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,6 +19,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.scene.input.DataFormat;
 import javafx.scene.input.DragEvent;
@@ -75,6 +77,15 @@ public class SijainnitController {
 				GridPane.setConstraints(view, i, j);
 				gp.getChildren().add(view);
 				addImageListener(view);
+				view.setPreserveRatio(true);
+				
+				StackPane pane=new StackPane(view);
+				pane.setPrefWidth(340/x);
+				pane.setPrefHeight(340/x);
+				pane.setAlignment(Pos.CENTER);
+				pane.setStyle("-fx-background-color: black");
+				GridPane.setConstraints(pane, i, j); // column=0 row=0
+				gp.getChildren().add(pane);//r
 			}
 		}
 		pane.getChildren().add(gp);
@@ -166,7 +177,7 @@ public class SijainnitController {
 				/* let the source know whether the string was successfully 
 				 * transferred and used */
 				ImageView target= (ImageView) dragEvent.getSource();
-				GridPane targetGrid= (GridPane) target.getParent();
+				GridPane targetGrid= (GridPane) target.getParent().getParent();
 				int x = GridPane.getRowIndex(target);
 				int y = GridPane.getColumnIndex(target);
 				Rectangle r= CreateShip();
