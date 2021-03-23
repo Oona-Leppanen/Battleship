@@ -3,7 +3,6 @@ package battleship;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -14,8 +13,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-//import javafx.scene.paint.Color;
-//import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class SijainnitController {
@@ -38,14 +35,7 @@ public class SijainnitController {
 		GameHolder holder=GameHolder.getInstance();
 		game=holder.getGame();
 		GridPane gp=new GridPane();
-		//gp.setStyle();
-		//gp.setStyle("-fx-border-color: black");
-		
-		//Class<?> clazz = MyClass.class;
-		//InputStream input = clazz.getResourceAsStream("/org/o7planning/javafx/icon/java-32.png");
-		//Image image=new Image(this.getClass().getResource("./battleship/Sea view4.jpg"));
 		Image image=new Image(getClass().getResource("Sea view4.jpg").toExternalForm());
-		//("Sea view4.jpg");//
 		
 		int x;
 		if(game.sizeX>game.sizeY) {
@@ -67,7 +57,6 @@ public class SijainnitController {
 				pane.setPrefHeight(340/x);
 				pane.setAlignment(Pos.CENTER);
 				pane.setStyle("-fx-background-color: black");
-				//
 				//view.setSmooth(true);
 				//view.setCache(true);
 				//Rectangle r= new Rectangle(330/x,330/x,Color.WHITE);
