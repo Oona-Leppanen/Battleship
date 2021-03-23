@@ -3,8 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -16,15 +14,8 @@
          <right>
             <Pane fx:id="playerBoard" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="250.0" prefWidth="250.0" BorderPane.alignment="CENTER">
                <BorderPane.margin>
-                  <Insets right="14.0" />
+                  <Insets right="5.0" />
                </BorderPane.margin>
-               <children>
-                  <ImageView fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@Sea%20view4.jpg" />
-                     </image>
-                  </ImageView>
-               </children>
             </Pane>
          </right>
          <left>
@@ -32,13 +23,6 @@
                <BorderPane.margin>
                   <Insets left="14.0" />
                </BorderPane.margin>
-               <children>
-                  <ImageView fitHeight="310.0" fitWidth="310.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@Sea%20view4.jpg" />
-                     </image>
-                  </ImageView>
-               </children>
             </Pane>
          </left>
          <top>

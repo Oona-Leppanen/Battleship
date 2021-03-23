@@ -3,12 +3,17 @@ package battleship;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -34,6 +39,8 @@ public class PelinakymaController {
 		game=holder.getGame();
 		GridPane gp1=new GridPane();
 		GridPane gp2=new GridPane();
+		Image image=new Image(getClass().getResource("Sea view4.jpg").toExternalForm());
+		
 		int x;
 		if(game.sizeX>game.sizeY) {
 			x=game.sizeX;
@@ -43,20 +50,42 @@ public class PelinakymaController {
 		}
 		for(int i=0; i<game.sizeX;i++) {
 			for(int j=0;j<game.sizeY;j++) {
-				Rectangle r= new Rectangle(300/x,300/x,Color.WHITE);
-				r.setStroke(Color.BLACK);
-				r.setOpacity(0.5);
-				GridPane.setConstraints(r, i, j); // column=0 row=0
-				gp1.getChildren().add(r);
+				ImageView view;
+				view=new ImageView(image);
+				view.setFitWidth(308/x);
+				view.setFitHeight(308/x);
+				view.setPreserveRatio(true);
+				
+				StackPane pane=new StackPane(view);
+				pane.setPrefWidth(315/x);
+				pane.setPrefHeight(315/x);
+				pane.setAlignment(Pos.CENTER);
+				pane.setStyle("-fx-background-color: black");
+				//Rectangle r= new Rectangle(300/x,300/x,Color.WHITE);
+				//r.setStroke(Color.BLACK);
+				//r.setOpacity(0.5);
+				GridPane.setConstraints(pane, i, j); // column=0 row=0
+				gp1.getChildren().add(pane); //r
 			}
 		}
 		for(int i=0; i<game.sizeX;i++) {
 			for(int j=0;j<game.sizeY;j++) {
-				Rectangle r= new Rectangle(240/x,240/x,Color.WHITE);
-				r.setStroke(Color.BLACK);
-				r.setOpacity(0.5);
-				GridPane.setConstraints(r, i, j); // column=0 row=0
-				gp2.getChildren().add(r);
+				ImageView view;
+				view=new ImageView(image);
+				view.setFitWidth(233/x);
+				view.setFitHeight(233/x);
+				view.setPreserveRatio(true);
+				
+				StackPane pane=new StackPane(view);
+				pane.setPrefWidth(240/x);
+				pane.setPrefHeight(240/x);
+				pane.setAlignment(Pos.CENTER);
+				pane.setStyle("-fx-background-color: black");
+				//Rectangle r= new Rectangle(240/x,240/x,Color.WHITE);
+				//r.setStroke(Color.BLACK);
+				//r.setOpacity(0.5);
+				GridPane.setConstraints(pane, i, j); // column=0 row=0
+				gp2.getChildren().add(pane); //r
 			}
 		}
 		playerBoard.getChildren().add(gp2);
