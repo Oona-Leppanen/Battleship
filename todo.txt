@@ -1,0 +1,46 @@
+onDragDetectedPane ottaa neliöstä kiinni ja siirtää sitä, jos droppi on väärässä paikassa, cancel
+-> otherwise droppaa ruudukkoon
+
+
+public void addListener(Pane pane) {
+		pane.setOnMouseDragEntered(new EventHandler<MouseEvent>() {
+			
+		}
+	}
+	
+
+	public void CreateShip(Pane pane) {
+		Rectangle rec= new Rectangle(110, 23, Color.BLACK);
+		rec.setLayoutX(24);
+		rec.setLayoutY(28);
+		pane.getChildren().add(rec);
+		final Delta dragDelta = new Delta();
+		pane.setOnMousePressed(new EventHandler<MouseEvent>() {
+			@Override public void handle(MouseEvent mouseEvent) {
+				// record a delta distance for the drag and drop operation.
+				dragDelta.x = rec.getLayoutX() - mouseEvent.getSceneX();
+				dragDelta.y = rec.getLayoutY() - mouseEvent.getSceneY();
+				rec.setCursor(Cursor.MOVE);
+			}
+		});
+		rec.setOnMouseReleased(new EventHandler<MouseEvent>() {
+			@Override public void handle(MouseEvent mouseEvent) {
+				rec.setCursor(Cursor.HAND);
+			}
+		});
+		rec.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			@Override public void handle(MouseEvent mouseEvent) {
+				rec.setLayoutX(mouseEvent.getSceneX() + dragDelta.x);
+				rec.setLayoutY(mouseEvent.getSceneY() + dragDelta.y);
+			}
+		});
+		rec.setOnMouseEntered(new EventHandler<MouseEvent>() {
+			@Override public void handle(MouseEvent mouseEvent) {
+				rec.setCursor(Cursor.HAND);
+			}
+		});
+	}
+}
+
+//records relative x and y co-ordinates.
+class Delta { double x, y; }

@@ -19,56 +19,56 @@
                   <Insets left="25.0" />
                </BorderPane.margin>
                <children>
-                  <Pane maxHeight="-Infinity" prefHeight="200.222" prefWidth="200.0" style="-fx-background-color: lightgrey;">
+                  <Pane fx:id="destroyerPane" maxHeight="-Infinity" prefHeight="200.222" prefWidth="200.0" style="-fx-background-color: lightgrey;">
                      <VBox.margin>
                         <Insets bottom="3.0" />
                      </VBox.margin>
                      <children>
                         <Label text="Destroyer" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="3.0" layoutY="24.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="3.0" layoutY="47.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="46.0" layoutY="24.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="46.0" layoutY="47.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="89.0" layoutY="24.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="3.0" layoutY="24.0" onDragDetected="#dragShip" onDragDone="#dragComplete" stroke="BLACK" strokeType="INSIDE" width="40.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="3.0" layoutY="47.0" onDragDetected="#dragShip" onDragDone="#dragComplete" stroke="BLACK" strokeType="INSIDE" width="40.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="46.0" layoutY="24.0" onDragDetected="#dragShip" onDragDone="#dragComplete" stroke="BLACK" strokeType="INSIDE" width="40.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="46.0" layoutY="47.0" onDragDetected="#dragShip" onDragDone="#dragComplete" stroke="BLACK" strokeType="INSIDE" width="40.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="89.0" layoutY="24.0" onDragDetected="#dragShip" onDragDone="#dragComplete" stroke="BLACK" strokeType="INSIDE" width="40.0" />
                      </children>
                   </Pane>
-                  <Pane prefHeight="200.222" prefWidth="200.0" style="-fx-background-color: lightgrey;">
+                  <Pane fx:id="submarinePane" prefHeight="200.222" prefWidth="200.0" style="-fx-background-color: lightgrey;">
                      <VBox.margin>
                         <Insets bottom="3.0" />
                      </VBox.margin>
                      <children>
                         <Label text="Submarine" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="3.0" layoutY="24.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="66.0" layoutY="24.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="3.0" layoutY="47.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="66.0" layoutY="47.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="3.0" layoutY="24.0" onDragDetected="#dragShip" onDragDone="#dragComplete" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="66.0" layoutY="24.0" onDragDetected="#dragShip" onDragDone="#dragComplete" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="3.0" layoutY="47.0" onDragDetected="#dragShip" onDragDone="#dragComplete" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="66.0" layoutY="47.0" onDragDetected="#dragShip" onDragDone="#dragComplete" stroke="BLACK" strokeType="INSIDE" width="60.0" />
                      </children>
                   </Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgrey;">
+                  <Pane fx:id="cruiserPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgrey;">
                      <VBox.margin>
                         <Insets bottom="3.0" />
                      </VBox.margin>
                      <children>
                         <Label text="Cruiser" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="3.0" layoutY="24.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="3.0" layoutY="47.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="66.0" layoutY="24.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="3.0" layoutY="24.0" onDragDetected="#dragShip" onDragDone="#dragComplete" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="3.0" layoutY="47.0" onDragDetected="#dragShip" onDragDone="#dragComplete" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="66.0" layoutY="24.0" onDragDetected="#dragShip" onDragDone="#dragComplete" stroke="BLACK" strokeType="INSIDE" width="60.0" />
                      </children>
                   </Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgrey;">
+                  <Pane fx:id="battleshipPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgrey;">
                      <VBox.margin>
                         <Insets bottom="3.0" />
                      </VBox.margin>
                      <children>
                         <Label text="Battleship" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="3.0" layoutY="47.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="3.0" layoutY="24.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="3.0" layoutY="47.0" onDragDetected="#dragShip" onDragDone="#dragComplete" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="3.0" layoutY="24.0" onDragDetected="#dragShip" onDragDone="#dragComplete" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                      </children>
                   </Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgrey;">
+                  <Pane fx:id="carrierPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgrey;">
                      <children>
                         <Label text="Carrier" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="3.0" layoutY="30.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="3.0" layoutY="30.0" onDragDetected="#dragShip" onDragDone="#dragComplete" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                      </children>
                   </Pane>
                </children>
