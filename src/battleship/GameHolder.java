@@ -1,8 +1,11 @@
 package battleship;
 
+import javafx.scene.input.DataFormat;
+
 public final class GameHolder {
 	  
 	  private Game game;
+	  private DataFormat data = new DataFormat("draggable ship"); 
 	  private final static GameHolder INSTANCE = new GameHolder();
 	  
 	  private GameHolder() {}
@@ -17,5 +20,9 @@ public final class GameHolder {
 	  
 	  public Game getGame() {
 	    return this.game;
+	  }
+	  
+	  public DataFormat getDataFormat() {
+		  return data;
 	  }
 	}
