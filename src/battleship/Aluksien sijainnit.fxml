@@ -14,12 +14,12 @@
    <children>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0">
          <left>
-            <VBox alignment="CENTER" prefHeight="391.0" prefWidth="159.0" BorderPane.alignment="CENTER">
+            <VBox alignment="BOTTOM_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="159.0" BorderPane.alignment="BOTTOM_CENTER">
                <BorderPane.margin>
                   <Insets left="25.0" />
                </BorderPane.margin>
                <children>
-                  <Pane fx:id="destroyerPane" maxHeight="-Infinity" prefHeight="200.222" prefWidth="200.0" style="-fx-background-color: lightgrey;">
+                  <Pane fx:id="destroyerPane" maxHeight="-Infinity" prefHeight="200.222" prefWidth="159.0" style="-fx-background-color: lightgrey;">
                      <VBox.margin>
                         <Insets bottom="3.0" />
                      </VBox.margin>
@@ -74,25 +74,8 @@
                </children>
             </VBox>
          </left>
-         <top>
-            <Label prefHeight="30.0" prefWidth="130.0" text="Place your ships" BorderPane.alignment="CENTER">
-               <BorderPane.margin>
-                  <Insets top="30.0" />
-               </BorderPane.margin>
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-         </top>
-         <center>
-            <Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="340.0" BorderPane.alignment="CENTER">
-               <BorderPane.margin>
-                  <Insets />
-               </BorderPane.margin>
-            </Pane>
-         </center>
          <bottom>
-            <HBox alignment="CENTER_RIGHT" prefHeight="68.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER_RIGHT" prefHeight="60.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <children>
                   <Button fx:id="backButton" mnemonicParsing="false" onAction="#Back" text="Back">
                      <HBox.margin>
@@ -102,12 +85,47 @@
                   <Button fx:id="resetButton" mnemonicParsing="false" onAction="#Reset" text="Reset" />
                   <Button fx:id="continueButton" mnemonicParsing="false" onAction="#Continue" text="Continue">
                      <HBox.margin>
-                        <Insets left="163.0" right="38.0" />
+                        <Insets left="160.0" right="38.0" />
                      </HBox.margin>
                   </Button>
                </children>
             </HBox>
          </bottom>
+         <center>
+            <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="431.0" prefWidth="415.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label prefHeight="30.0" prefWidth="130.0" text="Place your ships">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Press R to change ships' orientation:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="rotateLabel" text="Vertical" textFill="RED">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="330.0" />
+               </children>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+            </VBox>
+         </center>
       </BorderPane>
    </children>
 </Pane>
