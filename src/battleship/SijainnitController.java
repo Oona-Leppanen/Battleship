@@ -194,7 +194,9 @@ public class SijainnitController {
 		Node node = (Node) event.getSource(); // Tallennetaan nappi muuttujaan node
 		Stage stage = (Stage) node.getScene().getWindow(); // Haetaan napin scene ja Scenen ikkuna eli Stage-> tallennetaan stage
 		Parent root;
-
+		game.playerBoard1.clearBoard();
+		game.playerBoard2.clearBoard();
+		
 		try {
 			root=FXMLLoader.load(getClass().getResource("Laivanupotus_aloitusnaytto_2.fxml"));
 		}
