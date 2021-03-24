@@ -30,4 +30,15 @@ public class Ship {
 	void gotHit() {
 		this.hits += 1;
 	}
+	
+	public int[] onBoard(int order) {
+		if (vertical) {
+			int[] coordinates = {this.coordX, this.coordY+order};
+			return coordinates;
+		}
+		else {
+			int[] coordinates = {this.coordX+order, this.coordY};
+			return coordinates;
+		}
+	}
 }

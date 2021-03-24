@@ -1,10 +1,12 @@
 package battleship;
 
+import java.util.ArrayList;
 
 public class Board {
 	int boardSizeX;
 	int boardSizeY;
 	int[][] pelilauta;
+	ArrayList<Ship> shipsOnBoard;
 	Player p;
 
 	public Board(int boardSizeX, int boardSizeY, Player p) {
@@ -103,10 +105,12 @@ public class Board {
 			if (s.vertical) {
 				for (int i=0; i<s.size; i++) {
 					pelilauta[x][y+i] = 1;
+					shipsOnBoard.add(s);
 				}
 			} else {
 				for (int i=0; i<s.size; i++) {
 					pelilauta[x+i][y] = 1;
+					shipsOnBoard.add(s);
 				}
 			}
 			//Will have to adjust to GUI, placeholder print line
@@ -118,6 +122,7 @@ public class Board {
 		for (int i=0; i<boardSizeX; i++) {
 			for (int j=0; j<boardSizeY; j++) {
 				pelilauta[i][j] = 0;
+				shipsOnBoard.removeAll(shipsOnBoard);
 			}
 		}
 	}

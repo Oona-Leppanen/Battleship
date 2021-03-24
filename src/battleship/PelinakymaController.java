@@ -1,6 +1,7 @@
 package battleship;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -11,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -136,4 +138,21 @@ public class PelinakymaController {
 		stage.show(); // näytetään uusi scene
 	}
 
+	public void addImageListener(ImageView image) {
+		image.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent clickEvent) {
+				ImageView target= (ImageView) clickEvent.getSource();
+				GridPane targetGrid= (GridPane) target.getParent().getParent();
+				int y = GridPane.getRowIndex(target);
+				int x = GridPane.getColumnIndex(target);
+				if (game.playerBoard2.hasAShip(x, y)) {
+					 	
+				}
+			}
+			
+		}
+		);
+	}
 }
