@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
@@ -28,6 +29,7 @@ public class SijainnitController {
 
 	private DataFormat DRAGGABLE_SHIP_TYPE = GameHolder.getInstance().getDataFormat();
 	private Game game;
+	private boolean rotate=false;
 
 	@FXML
 	private Pane pane;
@@ -180,9 +182,13 @@ public class SijainnitController {
 				GridPane targetGrid= (GridPane) target.getParent().getParent();
 				int x = GridPane.getRowIndex(target);
 				int y = GridPane.getColumnIndex(target);
-				Rectangle r= CreateShip();
-				//GridPane.setRowSpan(r, 2);
-				GridPane.setColumnSpan(r, 2);
+				Rectangle r= CreateShip(rotate);
+				if(rotate) {
+					GridPane.setRowSpan(r, 2);
+				}
+				else if(!rotate) {
+					GridPane.setColumnSpan(r, 2);
+				}
 				GridPane.setConstraints(r, y, x);
 				targetGrid.getChildren().add(r);
 				System.out.println("Laivaa on upotettu");
@@ -228,9 +234,14 @@ public class SijainnitController {
 		Rectangle r= (Rectangle) event.getSource();
 		if(r.getOpacity()>0.5) {
 			Dragboard db = r.startDragAndDrop(TransferMode.ANY);
-			r.setRotate(90);
-			db.setDragView(r.snapshot(null, null));
-			r.setRotate(0);
+			if(rotate) {
+				r.setRotate(90);
+				db.setDragView(r.snapshot(null, null));
+				r.setRotate(0);
+			}
+			else {
+				db.setDragView(r.snapshot(null, null));
+			}
 			ClipboardContent content = new ClipboardContent();
 			content.put(DRAGGABLE_SHIP_TYPE, "");
 			db.setContent(content);
@@ -244,11 +255,27 @@ public class SijainnitController {
 		r.setOpacity(0.5);
 		System.out.println("SUCCESS");
 	}
+	
+    @FXML
+    void toggleRotate(KeyEvent event) {
+    	if(event.getText().equals("r")){
+    		rotate= !rotate;
+    	}
+    }
 
-	public Rectangle CreateShip() {
-		Rectangle rec= new Rectangle(110, 23, Color.BLACK);
-		rec.setLayoutX(24);
-		rec.setLayoutY(28);
-		return rec;
+	public Rectangle CreateShip(boolean rotate) {
+		if(rotate) {
+			Rectangle rec= new Rectangle(23, 110, Color.BLACK);
+			rec.setLayoutX(24);
+			rec.setLayoutY(28);
+			return rec;
+		}
+		else {
+			Rectangle rec= new Rectangle(110, 23, Color.BLACK);
+			rec.setLayoutX(24);
+			rec.setLayoutY(28);
+			return rec;
+		}
+		
 	}
 }
