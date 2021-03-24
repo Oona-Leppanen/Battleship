@@ -12,6 +12,8 @@ import javafx.stage.Stage;
 
 public class LoppuController {
 
+	private Game game;
+	
     @FXML
     private Button quitButton;
 
@@ -20,6 +22,18 @@ public class LoppuController {
 
     @FXML
     private Label winnerLabel;
+    
+    public void initialize(){
+    	GameHolder holder=GameHolder.getInstance();
+		game=holder.getGame();
+		
+    	if(true) {
+    		winnerLabel.setText(game.player1);
+    	}
+    	else {
+    		winnerLabel.setText(game.player2);
+    	}
+    }
 
     @FXML
     void NewGame(ActionEvent event) {

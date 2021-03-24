@@ -26,7 +26,7 @@
             </Pane>
          </left>
          <top>
-            <Label text="Shoot!" BorderPane.alignment="CENTER">
+            <Label fx:id="playLabel" text="Player 1 turn" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets top="30.0" />
                </BorderPane.margin>

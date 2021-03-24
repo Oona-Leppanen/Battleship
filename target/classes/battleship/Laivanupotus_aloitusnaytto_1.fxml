@@ -34,12 +34,12 @@
                   </Label>
                   <HBox prefHeight="28.0" prefWidth="341.0">
                      <children>
-                        <ComboBox fx:id="widthChooser" prefWidth="150.0" promptText="Choose width">
+                        <ComboBox fx:id="widthChooser" onAction="#checkValue" prefWidth="150.0" promptText="Choose width">
                            <HBox.margin>
                               <Insets left="9.0" />
                            </HBox.margin>
                         </ComboBox>
-                        <ComboBox fx:id="heightChooser" prefWidth="150.0" promptText="Choose height">
+                        <ComboBox fx:id="heightChooser" onAction="#checkValue" prefWidth="150.0" promptText="Choose height">
                            <HBox.margin>
                               <Insets bottom="5.0" left="20.0" />
                            </HBox.margin>

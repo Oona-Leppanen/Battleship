@@ -7,12 +7,30 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class ValiruutuController {
+	
+	private Game game;
 
     @FXML
     private Button continueButton;
+    
+    @FXML
+    private Label nextTurn;
+    
+    public void initialize(){
+    	GameHolder holder=GameHolder.getInstance();
+		game=holder.getGame();
+		
+    	if(true) {
+    		nextTurn.setText(game.player1);
+    	}
+    	else {
+    		nextTurn.setText(game.player2);
+    	}
+    }
 
     @FXML
     void Continue(ActionEvent event) {

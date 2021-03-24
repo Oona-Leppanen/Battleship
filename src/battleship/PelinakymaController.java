@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -26,6 +27,9 @@ public class PelinakymaController {
 
 	@FXML
 	private Pane opponentBoard;
+	
+    @FXML
+    private Label playLabel;
 
 	@FXML
 	private Button quitButton;
@@ -39,6 +43,13 @@ public class PelinakymaController {
 		GridPane gp1=new GridPane();
 		GridPane gp2=new GridPane();
 		Image image=new Image(getClass().getResource("Sea view4.jpg").toExternalForm());
+		
+		if(true) {
+			playLabel.setText(game.player1 + "'s turn");
+		}
+		else {
+			playLabel.setText(game.player2 + "'s turn");
+		}
 		
 		int x;
 		if(game.sizeX>game.sizeY) {
