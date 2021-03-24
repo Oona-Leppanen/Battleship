@@ -26,10 +26,10 @@
                      <children>
                         <Label text="Destroyer" />
                         <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="3.0" layoutY="24.0" onDragDetected="#dragShip" onDragDone="#dragComplete" stroke="BLACK" strokeType="INSIDE" width="40.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="3.0" layoutY="47.0" onDragDetected="#dragShip" onDragDone="#dragComplete" stroke="BLACK" strokeType="INSIDE" width="40.0" />
                         <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="46.0" layoutY="24.0" onDragDetected="#dragShip" onDragDone="#dragComplete" stroke="BLACK" strokeType="INSIDE" width="40.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="46.0" layoutY="47.0" onDragDetected="#dragShip" onDragDone="#dragComplete" stroke="BLACK" strokeType="INSIDE" width="40.0" />
                         <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="89.0" layoutY="24.0" onDragDetected="#dragShip" onDragDone="#dragComplete" stroke="BLACK" strokeType="INSIDE" width="40.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="3.0" layoutY="47.0" onDragDetected="#dragShip" onDragDone="#dragComplete" stroke="BLACK" strokeType="INSIDE" width="40.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="46.0" layoutY="47.0" onDragDetected="#dragShip" onDragDone="#dragComplete" stroke="BLACK" strokeType="INSIDE" width="40.0" />
                      </children>
                   </Pane>
                   <Pane fx:id="submarinePane" prefHeight="200.222" prefWidth="200.0" style="-fx-background-color: lightgrey;">
@@ -51,8 +51,8 @@
                      <children>
                         <Label text="Cruiser" />
                         <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="3.0" layoutY="24.0" onDragDetected="#dragShip" onDragDone="#dragComplete" stroke="BLACK" strokeType="INSIDE" width="60.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="3.0" layoutY="47.0" onDragDetected="#dragShip" onDragDone="#dragComplete" stroke="BLACK" strokeType="INSIDE" width="60.0" />
                         <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="66.0" layoutY="24.0" onDragDetected="#dragShip" onDragDone="#dragComplete" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="3.0" layoutY="47.0" onDragDetected="#dragShip" onDragDone="#dragComplete" stroke="BLACK" strokeType="INSIDE" width="60.0" />
                      </children>
                   </Pane>
                   <Pane fx:id="battleshipPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgrey;">
@@ -61,8 +61,8 @@
                      </VBox.margin>
                      <children>
                         <Label text="Battleship" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="3.0" layoutY="47.0" onDragDetected="#dragShip" onDragDone="#dragComplete" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                         <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="3.0" layoutY="24.0" onDragDetected="#dragShip" onDragDone="#dragComplete" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="3.0" layoutY="47.0" onDragDetected="#dragShip" onDragDone="#dragComplete" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                      </children>
                   </Pane>
                   <Pane fx:id="carrierPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgrey;">
@@ -104,12 +104,12 @@
                   </Label>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label text="Press R to change ships' orientation:">
+                        <Label fx:id="infoLabel" text="Press R to change ships' orientation:">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="rotateLabel" text="Vertical" textFill="RED">
+                        <Label fx:id="rotateLabel" text="Horizontal" textFill="RED">
                            <font>
                               <Font size="14.0" />
                            </font>

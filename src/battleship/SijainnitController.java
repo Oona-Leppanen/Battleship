@@ -1,5 +1,7 @@
 package battleship;
 
+import java.util.concurrent.TimeUnit;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -22,6 +24,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.input.DataFormat;
 import javafx.scene.input.DragEvent;
@@ -63,6 +66,9 @@ public class SijainnitController {
 	@FXML
 	private Label rotateLabel;
 
+    @FXML
+    private Label infoLabel;
+	
 	public void initialize(){
 		GameHolder holder=GameHolder.getInstance();
 		game=holder.getGame();
@@ -102,7 +108,9 @@ public class SijainnitController {
 				gp.getChildren().add(pane);//r
 			}
 		}
+
 		pane.getChildren().add(gp);
+
 		for (int i = 5; i > 0; i--) {
 			Rectangle r = (Rectangle)destroyerPane.getChildren().get(i);
 			if (game.destroyers < i) {
@@ -220,6 +228,10 @@ public class SijainnitController {
 				int x = GridPane.getColumnIndex(target);
 				if (!game.board1set) {
 					if (game.playerBoard1.willFit(s,x,y)) {
+						infoLabel.setText("Press R to change ships' orientation:");
+						infoLabel.setTextFill(Color.BLACK);
+						infoLabel.setFont(new Font("System", 14));
+						
 						Rectangle r= CreateShip(rotate);
 						game.playerBoard1.setAShip(s, x, y);
 						if(rotate) {
@@ -231,16 +243,24 @@ public class SijainnitController {
 						GridPane.setConstraints(r, x, y);
 						targetGrid.getChildren().add(r);
 						dragEvent.setDropCompleted(success);
-
+						
 						dragEvent.consume();
 					}
 					else {
+						infoLabel.setText("Invalid ship placement!");
+						infoLabel.setTextFill(Color.RED);
+						infoLabel.setFont(new Font("System", 18));
+						
 						System.out.println("Ei muuten mahtunu");
 						success = false;
 					}
 				}
 				else {
 					if (game.playerBoard2.willFit(s,x,y)) {
+						infoLabel.setText("Press R to change ships' orientation:");
+						infoLabel.setTextFill(Color.BLACK);
+						infoLabel.setFont(new Font("System", 14));
+						
 						Rectangle r= CreateShip(rotate);
 						game.playerBoard2.setAShip(s, x, y);
 						if(rotate) {
@@ -256,6 +276,10 @@ public class SijainnitController {
 						dragEvent.consume();
 					}
 					else {
+						infoLabel.setText("Invalid ship placement!");
+						infoLabel.setTextFill(Color.RED);
+						infoLabel.setFont(new Font("System", 16));
+						
 						System.out.println("Ei muuten mahtunu");
 						success = false;
 					}
@@ -328,7 +352,7 @@ public class SijainnitController {
 	@FXML
 	void toggleRotate(KeyEvent event) {
 		if(event.getText().equals("r")){
-			rotate= !rotate;
+			rotate = !rotate;
 			if(!rotate) {
 				rotateLabel.setText("Horizontal");
 			}
