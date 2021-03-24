@@ -176,16 +176,7 @@ public class SijainnitController {
 		image.setOnDragDropped(new EventHandler<DragEvent>() {
 			@Override
 			public void handle(DragEvent dragEvent) {
-				/* data dropped */
-				System.out.println("onDragDropped");
-				/* if there is a string data on dragboard, read it and use it */
-				Dragboard db = dragEvent.getDragboard();
-				success = false;
-				if (db.hasString()) {
-					success = true;
-				}
-				/* let the source know whether the string was successfully 
-				 * transferred and used */
+				success = true;
 				ImageView target= (ImageView) dragEvent.getSource();
 				GridPane targetGrid= (GridPane) target.getParent().getParent();
 				int x = GridPane.getRowIndex(target);
@@ -199,7 +190,6 @@ public class SijainnitController {
 				}
 				GridPane.setConstraints(r, y, x);
 				targetGrid.getChildren().add(r);
-				System.out.println("Laivaa on upotettu");
 				dragEvent.setDropCompleted(success);
 
 				dragEvent.consume();
@@ -213,7 +203,6 @@ public class SijainnitController {
 				if(event.getSource().getClass()==ImageView.class) {
 					event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
 					event.consume();
-					System.out.println("kerro kuvastin");
 				}
 			}
 		});
@@ -244,6 +233,7 @@ public class SijainnitController {
 	void dragShip(MouseEvent event) {
 		Rectangle r= (Rectangle) event.getSource();
 		if(r.getOpacity()>0.5) {
+			success=false;
 			Dragboard db = r.startDragAndDrop(TransferMode.ANY);
 			if(rotate) {
 				r.setRotate(90);
