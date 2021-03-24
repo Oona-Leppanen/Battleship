@@ -16,16 +16,16 @@
             <Image url="@SMS-Moltke-Hampton-Roads-1912-FINAL-2016052932.jpg" />
          </image>
       </ImageView>
-      <VBox layoutX="236.0" layoutY="62.0">
+      <VBox alignment="CENTER" layoutY="56.0" prefWidth="641.0">
          <children>
-            <Label text="Next player turn">
+            <Label fx:id="nextTurn" text="Player 1 turn">
                <font>
-                  <Font size="18.0" />
+                  <Font size="20.0" />
                </font>
             </Label>
             <Button fx:id="continueButton" mnemonicParsing="false" onAction="#Continue" text="Continue">
                <VBox.margin>
-                  <Insets left="33.0" top="210.0" />
+                  <Insets top="210.0" />
                </VBox.margin>
             </Button>
          </children>
