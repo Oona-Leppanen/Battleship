@@ -110,7 +110,7 @@ public class Aloitus2Controller {
 		Node node = (Node) event.getSource(); // Tallennetaan nappi muuttujaan node
 		Stage stage = (Stage) node.getScene().getWindow(); // Haetaan napin scene ja Scenen ikkuna eli Stage-> tallennetaan stage
 		Parent root;
-
+		game.setShips(destroyerAmount.getValue(), submarineAmount.getValue(), cruiserAmount.getValue(), battleshipAmount.getValue(), carrierAmount.getValue());
 		try {
 			root=FXMLLoader.load(getClass().getResource("Aluksien sijainnit.fxml"));
 		}

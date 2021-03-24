@@ -59,7 +59,7 @@ public class SijainnitController {
 
 	@FXML
 	private Button continueButton;
-	
+
 	@FXML
 	private Label rotateLabel;
 
@@ -103,6 +103,34 @@ public class SijainnitController {
 			}
 		}
 		pane.getChildren().add(gp);
+		for (int i = 5; i > 0; i--) {
+			Rectangle r = (Rectangle)destroyerPane.getChildren().get(i);
+			if (game.destroyers < i) {
+				r.setOpacity(0.5);
+			}
+		}
+		for (int i = 4; i > 0; i--) {
+			Rectangle r = (Rectangle)submarinePane.getChildren().get(i);
+			if (game.submarines < i) {
+				r.setOpacity(0.5);
+			}
+		}
+		for (int i = 3; i > 0; i--) {
+			Rectangle r = (Rectangle)cruiserPane.getChildren().get(i);
+			if (game.cruisers < i) {
+				r.setOpacity(0.5);
+			}
+		}
+		for (int i = 2; i > 0; i--) {
+			Rectangle r = (Rectangle)battleshipPane.getChildren().get(i);
+			if (game.battleships < i) {
+				r.setOpacity(0.5);
+			}
+		}
+		if (game.carriers < 1) {
+			Rectangle r = (Rectangle)carrierPane.getChildren().get(1);
+			r.setOpacity(0.5);
+		}
 	}
 
 	@FXML
@@ -144,7 +172,11 @@ public class SijainnitController {
 		Node node = (Node) event.getSource(); // Tallennetaan nappi muuttujaan node
 		Stage stage = (Stage) node.getScene().getWindow(); // Haetaan napin scene ja Scenen ikkuna eli Stage-> tallennetaan stage
 		Parent root;
-
+		if(game.board1set) {
+			game.playerBoard2.clearBoard();
+		} else {
+			game.playerBoard1.clearBoard();
+		}
 		try {
 			root=FXMLLoader.load(getClass().getResource("Aluksien sijainnit.fxml"));
 		}
@@ -180,24 +212,54 @@ public class SijainnitController {
 		image.setOnDragDropped(new EventHandler<DragEvent>() {
 			@Override
 			public void handle(DragEvent dragEvent) {
+				Ship s = new Ship(2,rotate);
 				success = true;
 				ImageView target= (ImageView) dragEvent.getSource();
 				GridPane targetGrid= (GridPane) target.getParent().getParent();
-				int x = GridPane.getRowIndex(target);
-				int y = GridPane.getColumnIndex(target);
-				Rectangle r= CreateShip(rotate);
-				if(rotate) {
-					GridPane.setRowSpan(r, 2);
-				}
-				else if(!rotate) {
-					GridPane.setColumnSpan(r, 2);
-				}
-				GridPane.setConstraints(r, y, x);
-				targetGrid.getChildren().add(r);
-				dragEvent.setDropCompleted(success);
+				int y = GridPane.getRowIndex(target);
+				int x = GridPane.getColumnIndex(target);
+				if (!game.board1set) {
+					if (game.playerBoard1.willFit(s,x,y)) {
+						Rectangle r= CreateShip(rotate);
+						game.playerBoard1.setAShip(s, x, y);
+						if(rotate) {
+							GridPane.setRowSpan(r, 2);
+						}
+						else if(!rotate) {
+							GridPane.setColumnSpan(r, 2);
+						}
+						GridPane.setConstraints(r, x, y);
+						targetGrid.getChildren().add(r);
+						dragEvent.setDropCompleted(success);
 
-				dragEvent.consume();
+						dragEvent.consume();
+					}
+					else {
+						System.out.println("Ei muuten mahtunu");
+						success = false;
+					}
+				}
+				else {
+					if (game.playerBoard2.willFit(s,x,y)) {
+						Rectangle r= CreateShip(rotate);
+						game.playerBoard2.setAShip(s, x, y);
+						if(rotate) {
+							GridPane.setRowSpan(r, 2);
+						}
+						else if(!rotate) {
+							GridPane.setColumnSpan(r, 2);
+						}
+						GridPane.setConstraints(r, x, y);
+						targetGrid.getChildren().add(r);
+						dragEvent.setDropCompleted(success);
 
+						dragEvent.consume();
+					}
+					else {
+						System.out.println("Ei muuten mahtunu");
+						success = false;
+					}
+				}
 			}
 		});
 

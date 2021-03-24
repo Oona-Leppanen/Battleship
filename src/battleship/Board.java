@@ -114,7 +114,13 @@ public class Board {
 			System.out.println("Ei muuten mahdu");
 		}
 	}
-	
+	public void clearBoard() {
+		for (int i=0; i<boardSizeX; i++) {
+			for (int j=0; j<boardSizeY; j++) {
+				pelilauta[i][j] = 0;
+			}
+		}
+	}
 	public boolean lost(Board b) {
 		for (int i = 0; i < b.boardSizeX; i++) {
 			for (int j=0; j < b.boardSizeY; j++) {
