@@ -29,13 +29,20 @@ public class Aloitus1Controller {
     private Button nextButton;
     
     public void initialize() {
+    	nextButton.setDisable(true);
     	for(int i=5; i<11;i++) {
     		widthChooser.getItems().add(i);
     		heightChooser.getItems().add(i);
-
     	}
     }
-
+    
+    @FXML
+    void checkValue(ActionEvent event) {
+    	if(widthChooser.getValue()!=null && heightChooser.getValue()!=null) {
+    		nextButton.setDisable(false);
+    	}
+    }
+    
     @FXML
     void ButtonPressed(ActionEvent event) {
     	Game game=new Game(p1Input.getText(), p2Input.getText(), widthChooser.getValue(), heightChooser.getValue());
