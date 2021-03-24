@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
@@ -58,6 +59,9 @@ public class SijainnitController {
 
 	@FXML
 	private Button continueButton;
+	
+	@FXML
+	private Label rotateLabel;
 
 	public void initialize(){
 		GameHolder holder=GameHolder.getInstance();

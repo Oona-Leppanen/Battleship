@@ -119,7 +119,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="330.0" style="-fx-background-color: lightyellow;" />
+                  <Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="330.0" />
                </children>
                <BorderPane.margin>
                   <Insets />
