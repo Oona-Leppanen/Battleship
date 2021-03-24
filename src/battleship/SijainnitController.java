@@ -260,6 +260,7 @@ public class SijainnitController {
 			Rectangle r=(Rectangle) event.getSource();
 			r.setOpacity(0.5);
 			System.out.println("SUCCESS");
+			System.out.println("lul");
 		}
 	}
 
