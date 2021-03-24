@@ -277,6 +277,12 @@ public class SijainnitController {
 	void toggleRotate(KeyEvent event) {
 		if(event.getText().equals("r")){
 			rotate= !rotate;
+			if(!rotate) {
+				rotateLabel.setText("Horizontal");
+			}
+			else {
+				rotateLabel.setText("Vertical");
+			}
 		}
 	}
 
