@@ -18,9 +18,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.scene.input.DataFormat;
 import javafx.scene.input.DragEvent;
@@ -63,6 +63,7 @@ public class SijainnitController {
 		game=holder.getGame();
 		GridPane gp=new GridPane();
 		Image image=new Image(getClass().getResource("Sea view4.jpg").toExternalForm());
+		
 		int x;
 		if(game.sizeX>game.sizeY) {
 			x=game.sizeX;
@@ -86,6 +87,12 @@ public class SijainnitController {
 				pane.setPrefHeight(340/x);
 				pane.setAlignment(Pos.CENTER);
 				pane.setStyle("-fx-background-color: black");
+				//view.setSmooth(true);
+				//view.setCache(true);
+				//Rectangle r= new Rectangle(330/x,330/x,Color.WHITE);
+				//r.setStroke(Color.BLACK);
+				//r.setOpacity(0.5);
+				
 				GridPane.setConstraints(pane, i, j); // column=0 row=0
 				gp.getChildren().add(pane);//r
 			}
