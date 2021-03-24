@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
@@ -28,6 +29,8 @@ public class SijainnitController {
 
 	private DataFormat DRAGGABLE_SHIP_TYPE = GameHolder.getInstance().getDataFormat();
 	private Game game;
+	private boolean rotate=false;
+	private boolean success;
 
 	@FXML
 	private Pane pane;
@@ -61,7 +64,7 @@ public class SijainnitController {
 		game=holder.getGame();
 		GridPane gp=new GridPane();
 		Image image=new Image(getClass().getResource("Sea view4.jpg").toExternalForm());
-		
+
 		int x;
 		if(game.sizeX>game.sizeY) {
 			x=game.sizeX;
@@ -79,7 +82,7 @@ public class SijainnitController {
 				gp.getChildren().add(view);
 				addImageListener(view);
 				view.setPreserveRatio(true);
-				
+
 				StackPane pane=new StackPane(view);
 				pane.setPrefWidth(340/x);
 				pane.setPrefHeight(340/x);
@@ -90,7 +93,7 @@ public class SijainnitController {
 				//Rectangle r= new Rectangle(330/x,330/x,Color.WHITE);
 				//r.setStroke(Color.BLACK);
 				//r.setOpacity(0.5);
-				
+
 				GridPane.setConstraints(pane, i, j); // column=0 row=0
 				gp.getChildren().add(pane);//r
 			}
@@ -177,7 +180,7 @@ public class SijainnitController {
 				System.out.println("onDragDropped");
 				/* if there is a string data on dragboard, read it and use it */
 				Dragboard db = dragEvent.getDragboard();
-				boolean success = false;
+				success = false;
 				if (db.hasString()) {
 					success = true;
 				}
@@ -187,9 +190,13 @@ public class SijainnitController {
 				GridPane targetGrid= (GridPane) target.getParent().getParent();
 				int x = GridPane.getRowIndex(target);
 				int y = GridPane.getColumnIndex(target);
-				Rectangle r= CreateShip();
-				//GridPane.setRowSpan(r, 2);
-				GridPane.setColumnSpan(r, 2);
+				Rectangle r= CreateShip(rotate);
+				if(rotate) {
+					GridPane.setRowSpan(r, 2);
+				}
+				else if(!rotate) {
+					GridPane.setColumnSpan(r, 2);
+				}
 				GridPane.setConstraints(r, y, x);
 				targetGrid.getChildren().add(r);
 				System.out.println("Laivaa on upotettu");
@@ -203,8 +210,11 @@ public class SijainnitController {
 
 		image.setOnDragOver(new EventHandler <DragEvent>() {
 			public void handle(DragEvent event) {
-				event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-				event.consume();
+				if(event.getSource().getClass()==ImageView.class) {
+					event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+					event.consume();
+					System.out.println("kerro kuvastin");
+				}
 			}
 		});
 
@@ -235,11 +245,16 @@ public class SijainnitController {
 		Rectangle r= (Rectangle) event.getSource();
 		if(r.getOpacity()>0.5) {
 			Dragboard db = r.startDragAndDrop(TransferMode.ANY);
-			r.setRotate(90);
-			db.setDragView(r.snapshot(null, null));
-			r.setRotate(0);
+			if(rotate) {
+				r.setRotate(90);
+				db.setDragView(r.snapshot(null, null));
+				r.setRotate(0);
+			}
+			else {
+				db.setDragView(r.snapshot(null, null));
+			}
 			ClipboardContent content = new ClipboardContent();
-			content.put(DRAGGABLE_SHIP_TYPE, "");
+			content.put(DRAGGABLE_SHIP_TYPE, "Token text");
 			db.setContent(content);
 			event.consume();
 		}
@@ -247,15 +262,33 @@ public class SijainnitController {
 
 	@FXML
 	void dragComplete(DragEvent event) {
-		Rectangle r=(Rectangle) event.getSource();
-		r.setOpacity(0.5);
-		System.out.println("SUCCESS");
+		if(success) {
+			Rectangle r=(Rectangle) event.getSource();
+			r.setOpacity(0.5);
+			System.out.println("SUCCESS");
+		}
 	}
 
-	public Rectangle CreateShip() {
-		Rectangle rec= new Rectangle(110, 23, Color.BLACK);
-		rec.setLayoutX(24);
-		rec.setLayoutY(28);
-		return rec;
+	@FXML
+	void toggleRotate(KeyEvent event) {
+		if(event.getText().equals("r")){
+			rotate= !rotate;
+		}
+	}
+
+	public Rectangle CreateShip(boolean rotate) {
+		if(rotate) {
+			Rectangle rec= new Rectangle(23, 110, Color.BLACK);
+			rec.setLayoutX(24);
+			rec.setLayoutY(28);
+			return rec;
+		}
+		else {
+			Rectangle rec= new Rectangle(110, 23, Color.BLACK);
+			rec.setLayoutX(24);
+			rec.setLayoutY(28);
+			return rec;
+		}
+
 	}
 }
