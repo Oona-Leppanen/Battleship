@@ -1,12 +1,12 @@
 package battleship;
 
-import java.util.concurrent.TimeUnit;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.HPos;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -35,6 +35,8 @@ public class SijainnitController {
 	private Game game;
 	private boolean rotate=false;
 	private boolean success;
+	private int size;
+	int x;
 
 	@FXML
 	private Pane pane;
@@ -75,7 +77,6 @@ public class SijainnitController {
 		GridPane gp=new GridPane();
 		Image image=new Image(getClass().getResource("Sea view4.jpg").toExternalForm());
 
-		int x;
 		if(game.sizeX>game.sizeY) {
 			x=game.sizeX;
 		}
@@ -88,8 +89,6 @@ public class SijainnitController {
 				view=new ImageView(image);
 				view.setFitWidth(330/x);
 				view.setFitHeight(330/x);
-				GridPane.setConstraints(view, i, j);
-				gp.getChildren().add(view);
 				addImageListener(view);
 				view.setPreserveRatio(true);
 
@@ -222,12 +221,12 @@ public class SijainnitController {
 		image.setOnDragDropped(new EventHandler<DragEvent>() {
 			@Override
 			public void handle(DragEvent dragEvent) {
-				Ship s = new Ship(2,rotate);
+				Ship s = new Ship(size,rotate);
 				success = true;
 				ImageView target= (ImageView) dragEvent.getSource();
 				GridPane targetGrid= (GridPane) target.getParent().getParent();
-				int y = GridPane.getRowIndex(target);
-				int x = GridPane.getColumnIndex(target);
+				int y = GridPane.getRowIndex(target.getParent());
+				int x = GridPane.getColumnIndex(target.getParent());
 				if (!game.board1set) {
 					if (game.playerBoard1.willFit(s,x,y)) {
 						infoLabel.setText("Press R to change ships' orientation:");
@@ -237,12 +236,14 @@ public class SijainnitController {
 						Rectangle r= CreateShip(rotate);
 						game.playerBoard1.setAShip(s, x, y);
 						if(rotate) {
-							GridPane.setRowSpan(r, 2);
+							GridPane.setRowSpan(r, size);
 						}
 						else if(!rotate) {
-							GridPane.setColumnSpan(r, 2);
+							GridPane.setColumnSpan(r, size);
 						}
 						GridPane.setConstraints(r, x, y);
+						GridPane.setHalignment(r, HPos.CENTER);
+						GridPane.setValignment(r, VPos.CENTER);
 						targetGrid.getChildren().add(r);
 						dragEvent.setDropCompleted(success);
 						
@@ -266,10 +267,10 @@ public class SijainnitController {
 						Rectangle r= CreateShip(rotate);
 						game.playerBoard2.setAShip(s, x, y);
 						if(rotate) {
-							GridPane.setRowSpan(r, 2);
+							GridPane.setRowSpan(r, size);
 						}
 						else if(!rotate) {
-							GridPane.setColumnSpan(r, 2);
+							GridPane.setColumnSpan(r, size);
 						}
 						GridPane.setConstraints(r, x, y);
 						targetGrid.getChildren().add(r);
@@ -320,11 +321,31 @@ public class SijainnitController {
 			}
 		});
 	}
-
+	
+	void setSizeShips(Rectangle r) {
+		if(r.getParent().equals(destroyerPane)) {
+			size=2;
+			System.out.println("koko 2");
+		}
+		else if(r.getParent().equals(submarinePane) || r.getParent().equals(cruiserPane)) {
+			size=3;
+			System.out.println("koko 3");
+		}
+		else if(r.getParent().equals(battleshipPane)) {
+			size=4;
+			System.out.println("koko 4");
+		}
+		else if(r.getParent().equals(carrierPane)) {
+			size=5;
+			System.out.println("koko 5");
+		}
+	}
+	
 	@FXML
 	void dragShip(MouseEvent event) {
 		Rectangle r= (Rectangle) event.getSource();
 		if(r.getOpacity()>0.5) {
+			setSizeShips(r);
 			success=false;
 			Dragboard db = r.startDragAndDrop(TransferMode.ANY);
 			if(rotate) {
@@ -366,16 +387,16 @@ public class SijainnitController {
 	}
 
 	public Rectangle CreateShip(boolean rotate) {
+		int viewsize = 330/x;
+		int bordersize = 10/x;
+		int shipw = viewsize*(size-1)+viewsize/3+bordersize*(size-1); //laivan leveys
+		int shiph = viewsize/2+bordersize*2; //laivan korkeus
 		if(rotate) {
-			Rectangle rec= new Rectangle(23, 110, Color.BLACK);
-			rec.setLayoutX(24);
-			rec.setLayoutY(28);
+			Rectangle rec= new Rectangle(shiph, shipw, Color.BLACK);
 			return rec;
 		}
 		else {
-			Rectangle rec= new Rectangle(110, 23, Color.BLACK);
-			rec.setLayoutX(24);
-			rec.setLayoutY(28);
+			Rectangle rec= new Rectangle(shipw, shiph, Color.BLACK);
 			return rec;
 		}
 
