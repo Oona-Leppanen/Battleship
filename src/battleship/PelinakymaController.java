@@ -147,8 +147,16 @@ public class PelinakymaController {
 				GridPane targetGrid= (GridPane) target.getParent().getParent();
 				int y = GridPane.getRowIndex(target);
 				int x = GridPane.getColumnIndex(target);
-				if (game.playerBoard2.hasAShip(x, y)) {
-					 	
+				for (int i=0; i < game.playerBoard2.shipsOnBoard.size(); i++) {
+					for (int j=0; j < game.playerBoard2.shipsOnBoard.get(i).size; j++) {
+//						if (game.playerBoard2.pelilauta[][])
+					}
+//					if (game.playerBoard2.shipsOnBoard.get(i).onBoard(i) == game.playerBoard) {
+//						
+//					}
+//				}
+//				if (game.playerBoard2.hasAShip(x, y)) {
+//					 	
 				}
 			}
 			
