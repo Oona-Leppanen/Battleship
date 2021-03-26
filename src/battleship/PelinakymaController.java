@@ -16,20 +16,23 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class PelinakymaController {
 
 	private Game game;
+	int x;
 
 	@FXML
 	private Pane playerBoard;
 
 	@FXML
 	private Pane opponentBoard;
-	
-    @FXML
-    private Label playLabel;
+
+	@FXML
+	private Label playLabel;
 
 	@FXML
 	private Button quitButton;
@@ -43,15 +46,14 @@ public class PelinakymaController {
 		GridPane gp1=new GridPane();
 		GridPane gp2=new GridPane();
 		Image image=new Image(getClass().getResource("Sea view4.jpg").toExternalForm());
-		
+
 		if(true) {
 			playLabel.setText(game.player1 + "'s turn");
 		}
 		else {
 			playLabel.setText(game.player2 + "'s turn");
 		}
-		
-		int x;
+
 		if(game.sizeX>game.sizeY) {
 			x=game.sizeX;
 		}
@@ -65,7 +67,10 @@ public class PelinakymaController {
 				view.setFitWidth(308/x);
 				view.setFitHeight(308/x);
 				view.setPreserveRatio(true);
-				
+				if(game.playerBoard2.pelilauta[i][j]==0 || game.playerBoard2.pelilauta[i][j]==1) {
+					addImageListener(view);
+				}
+
 				StackPane pane=new StackPane(view);
 				pane.setPrefWidth(315/x);
 				pane.setPrefHeight(315/x);
@@ -76,6 +81,16 @@ public class PelinakymaController {
 				//r.setOpacity(0.5);
 				GridPane.setConstraints(pane, i, j); // column=0 row=0
 				gp1.getChildren().add(pane); //r
+				if(game.playerBoard2.pelilauta[i][j]==2) {
+					ImageView r= createMiss();
+					GridPane.setConstraints(r, i, j);
+					gp1.getChildren().add(r);
+				}
+				if(game.playerBoard2.pelilauta[i][j]==3) {
+					ImageView r= createHit();
+					GridPane.setConstraints(r, i, j);
+					gp1.getChildren().add(r);
+				}
 			}
 		}
 		for(int i=0; i<game.sizeX;i++) {
@@ -85,7 +100,7 @@ public class PelinakymaController {
 				view.setFitWidth(233/x);
 				view.setFitHeight(233/x);
 				view.setPreserveRatio(true);
-				
+
 				StackPane pane=new StackPane(view);
 				pane.setPrefWidth(240/x);
 				pane.setPrefHeight(240/x);
@@ -138,29 +153,64 @@ public class PelinakymaController {
 		stage.show(); // näytetään uusi scene
 	}
 
-	public void addImageListener(ImageView image) {
-		image.setOnMouseClicked(new EventHandler<MouseEvent>() {
+	public ImageView createHit() {
+		Image image=new Image(getClass().getResource("hit.png").toExternalForm());
+		ImageView view=new ImageView(image);
+		view.setFitWidth(308/x);
+		view.setFitHeight(308/x);
+		addImageListener(view);
+		view.setPreserveRatio(true);
+		return view;
+	}
+	public ImageView createMiss() {
+		Image image=new Image(getClass().getResource("upotettu.jpg").toExternalForm());
+		ImageView view=new ImageView(image);
+		view.setFitWidth(308/x);
+		view.setFitHeight(308/x);
+		addImageListener(view);
+		view.setPreserveRatio(true);
+		return view;
+	}
 
+	private void addImageListener(ImageView image) {
+		image.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent clickEvent) {
 				ImageView target= (ImageView) clickEvent.getSource();
 				GridPane targetGrid= (GridPane) target.getParent().getParent();
-				int y = GridPane.getRowIndex(target);
-				int x = GridPane.getColumnIndex(target);
+				int y = GridPane.getRowIndex(target.getParent());
+				int x = GridPane.getColumnIndex(target.getParent());
 				for (int i=0; i < game.playerBoard2.shipsOnBoard.size(); i++) {
-					for (int j=0; j < game.playerBoard2.shipsOnBoard.get(i).size; j++) {
-//						if (game.playerBoard2.pelilauta[][])
+					System.out.println("Laiva numero " + i);
+					if (game.playerBoard2.pelilauta[game.playerBoard2.shipsOnBoard.get(i).onBoard(x)[0]][game.playerBoard2.shipsOnBoard.get(i).onBoard(y)[1]] == game.playerBoard2.pelilauta[x][y]) {
+						game.playerBoard2.shipsOnBoard.get(i).gotHit();
+						System.out.println("Thaat's a hit");
+						if (!game.playerBoard2.shipsOnBoard.get(i).isAlive()) {
+							game.playerBoard2.shipsOnBoard.remove(i);
+							System.out.println("Laiva on uponnut ruudusta (" + ((game.playerBoard2.shipsOnBoard.get(i).coordX)+1) + "," + ((game.playerBoard2.shipsOnBoard.get(i).coordY)+1) + ")" );
+						}
 					}
-//					if (game.playerBoard2.shipsOnBoard.get(i).onBoard(i) == game.playerBoard) {
-//						
-//					}
-//				}
-//				if (game.playerBoard2.hasAShip(x, y)) {
-//					 	
+					else {
+						System.out.println("You missed son, on ship number " + i);
+					}
 				}
+				if (game.playerBoard2.hasAShip(x, y)) {
+					ImageView r= createHit();
+					GridPane.setConstraints(r, x, y);
+					targetGrid.getChildren().add(r);
+					game.playerBoard2.pelilauta[x][y] = 3;					
+				}
+				else {
+					ImageView r= createMiss();
+					GridPane.setConstraints(r, x, y);
+					targetGrid.getChildren().add(r);
+					game.playerBoard2.pelilauta[x][y] = 2;
+				}
+				targetGrid.setDisable(true);
+
+
 			}
-			
 		}
-		);
+				);	
 	}
 }

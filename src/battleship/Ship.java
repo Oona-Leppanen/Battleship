@@ -35,12 +35,12 @@ public class Ship {
 		if (vertical) {
 			int [] coordinates = new int[2];
 				coordinates[0] = coordX;
-				coordinates[1] = coordY+order;
+				coordinates[1] = order;
 			return coordinates;
 		}
 		if (!vertical) {
 			int [] coordinates = new int[2];
-				coordinates[0] = coordX+order;
+				coordinates[0] = order;
 				coordinates[1] = coordY;
 			return coordinates;
 		}
