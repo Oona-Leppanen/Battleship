@@ -50,7 +50,7 @@ public class LoppuController {
 		}
 		Scene scene= new Scene(root);
 		stage.setScene(scene); // asetetaan uusi Scene
-		stage.show(); // näytetään uusi scene
+		stage.show(); // näytetään uusi scene 
 	}
 
     @FXML
