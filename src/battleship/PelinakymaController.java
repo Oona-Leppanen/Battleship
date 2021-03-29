@@ -163,7 +163,7 @@ public class PelinakymaController {
 		return view;
 	}
 	public ImageView createMiss() {
-		Image image=new Image(getClass().getResource("upotettu.jpg").toExternalForm());
+		Image image=new Image(getClass().getResource("miss.jpg").toExternalForm());
 		ImageView view=new ImageView(image);
 		view.setFitWidth(308/x);
 		view.setFitHeight(308/x);
