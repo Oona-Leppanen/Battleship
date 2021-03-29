@@ -3,6 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -12,6 +14,11 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#toggleRotate" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="battleship.SijainnitController">
    <children>
+      <ImageView fitHeight="451.0" fitWidth="600.0" opacity="0.35" pickOnBounds="true">
+         <image>
+            <Image url="@tausta2.jpg" />
+         </image>
+      </ImageView>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0">
          <left>
             <VBox alignment="BOTTOM_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="159.0" BorderPane.alignment="BOTTOM_CENTER">
@@ -19,7 +26,7 @@
                   <Insets left="25.0" />
                </BorderPane.margin>
                <children>
-                  <Pane fx:id="destroyerPane" maxHeight="-Infinity" prefHeight="200.222" prefWidth="159.0" style="-fx-background-color: lightgrey;">
+                  <Pane fx:id="destroyerPane" maxHeight="-Infinity" prefHeight="200.222" prefWidth="159.0" style="-fx-background-color: silver;">
                      <VBox.margin>
                         <Insets bottom="3.0" />
                      </VBox.margin>
@@ -31,8 +38,11 @@
                         <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="3.0" layoutY="47.0" onDragDetected="#dragShip" onDragDone="#dragComplete" stroke="BLACK" strokeType="INSIDE" width="40.0" />
                         <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="46.0" layoutY="47.0" onDragDetected="#dragShip" onDragDone="#dragComplete" stroke="BLACK" strokeType="INSIDE" width="40.0" />
                      </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
                   </Pane>
-                  <Pane fx:id="submarinePane" prefHeight="200.222" prefWidth="200.0" style="-fx-background-color: lightgrey;">
+                  <Pane fx:id="submarinePane" prefHeight="200.222" prefWidth="200.0" style="-fx-background-color: silver;">
                      <VBox.margin>
                         <Insets bottom="3.0" />
                      </VBox.margin>
@@ -44,7 +54,7 @@
                         <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="66.0" layoutY="47.0" onDragDetected="#dragShip" onDragDone="#dragComplete" stroke="BLACK" strokeType="INSIDE" width="60.0" />
                      </children>
                   </Pane>
-                  <Pane fx:id="cruiserPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgrey;">
+                  <Pane fx:id="cruiserPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: silver;">
                      <VBox.margin>
                         <Insets bottom="3.0" />
                      </VBox.margin>
@@ -55,7 +65,7 @@
                         <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="3.0" layoutY="47.0" onDragDetected="#dragShip" onDragDone="#dragComplete" stroke="BLACK" strokeType="INSIDE" width="60.0" />
                      </children>
                   </Pane>
-                  <Pane fx:id="battleshipPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgrey;">
+                  <Pane fx:id="battleshipPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: silver;">
                      <VBox.margin>
                         <Insets bottom="3.0" />
                      </VBox.margin>
@@ -65,7 +75,7 @@
                         <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="3.0" layoutY="47.0" onDragDetected="#dragShip" onDragDone="#dragComplete" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                      </children>
                   </Pane>
-                  <Pane fx:id="carrierPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgrey;">
+                  <Pane fx:id="carrierPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: silver;">
                      <children>
                         <Label text="Carrier" />
                         <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="3.0" layoutY="30.0" onDragDetected="#dragShip" onDragDone="#dragComplete" stroke="BLACK" strokeType="INSIDE" width="100.0" />
@@ -94,7 +104,7 @@
          <center>
             <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="431.0" prefWidth="415.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label prefHeight="30.0" prefWidth="130.0" text="Place your ships">
+                  <Label fx:id="placeLabel" prefHeight="30.0" text="Place your ships">
                      <font>
                         <Font size="18.0" />
                      </font>

@@ -64,6 +64,9 @@ public class SijainnitController {
 
 	@FXML
 	private Button continueButton;
+	
+	@FXML
+	private Label placeLabel;
 
 	@FXML
 	private Label rotateLabel;
@@ -76,6 +79,12 @@ public class SijainnitController {
 		game=holder.getGame();
 		GridPane gp=new GridPane();
 		Image image=new Image(getClass().getResource("Sea view4.jpg").toExternalForm());
+		if(!game.board1set) {
+			placeLabel.setText(game.player1 + ", place your ships");
+		}
+		else {
+			placeLabel.setText(game.player2 + ", place your ships");
+		}
 
 		if(game.sizeX>game.sizeY) {
 			x=game.sizeX;
@@ -145,6 +154,7 @@ public class SijainnitController {
 		Node node = (Node) event.getSource(); // Tallennetaan nappi muuttujaan node
 		Stage stage = (Stage) node.getScene().getWindow(); // Haetaan napin scene ja Scenen ikkuna eli Stage-> tallennetaan stage
 		if(!game.board1set) {
+			game.board1set=true;
 			Parent root;
 			try {
 				root=FXMLLoader.load(getClass().getResource("Aluksien sijainnit.fxml"));
@@ -156,7 +166,6 @@ public class SijainnitController {
 			Scene scene= new Scene(root);
 			stage.setScene(scene); // asetetaan uusi Scene
 			stage.show(); // näytetään uusi scene
-			game.board1set=true;
 		}
 		else {
 			Parent root;

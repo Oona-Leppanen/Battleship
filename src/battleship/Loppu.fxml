@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="battleship.LoppuController">
    <children>
       <ImageView fitHeight="450.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
@@ -43,22 +42,22 @@
             </Label>
          </top>
          <center>
-            <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="240.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+            <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="256.0" prefWidth="169.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label text="Winner:" textFill="#0c0c0c">
+                  <Label alignment="CENTER" text="Winner:" textFill="#0c0c0c">
                      <font>
                         <Font size="36.0" />
                      </font>
                      <VBox.margin>
-                        <Insets left="85.0" />
+                        <Insets />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="winnerLabel" text="Player 1" textFill="#fefbfb">
+                  <Label fx:id="winnerLabel" alignment="CENTER" prefHeight="75.0" prefWidth="169.0" text="Player 1" textFill="#fefbfb">
                      <font>
                         <Font size="48.0" />
                      </font>
                      <VBox.margin>
-                        <Insets left="65.0" top="25.0" />
+                        <Insets top="25.0" />
                      </VBox.margin>
                   </Label>
                </children>

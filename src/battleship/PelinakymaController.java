@@ -4,7 +4,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.HPos;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -16,8 +18,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class PelinakymaController {
@@ -166,8 +166,11 @@ public class PelinakymaController {
 	public ImageView createHit() {
 		Image image=new Image(getClass().getResource("hit.png").toExternalForm());
 		ImageView view=new ImageView(image);
-		view.setFitWidth(308/x);
-		view.setFitHeight(308/x);
+		GridPane.setHalignment(view, HPos.CENTER);
+		GridPane.setValignment(view, VPos.CENTER);
+		int gridsize = 308/x;
+		view.setFitWidth(gridsize*4/5);
+		view.setFitHeight(gridsize*4/5);
 		addImageListener(view);
 		view.setPreserveRatio(true);
 		return view;
@@ -175,8 +178,11 @@ public class PelinakymaController {
 	public ImageView createMiss() {
 		Image image=new Image(getClass().getResource("miss.jpg").toExternalForm());
 		ImageView view=new ImageView(image);
-		view.setFitWidth(308/x);
-		view.setFitHeight(308/x);
+		GridPane.setHalignment(view, HPos.CENTER);
+		GridPane.setValignment(view, VPos.CENTER);
+		int gridsize = 308/x;
+		view.setFitWidth(gridsize*4/5);
+		view.setFitHeight(gridsize*4/5);
 		addImageListener(view);
 		view.setPreserveRatio(true);
 		return view;

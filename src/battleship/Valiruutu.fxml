@@ -25,7 +25,7 @@
             </Label>
             <Button fx:id="continueButton" mnemonicParsing="false" onAction="#Continue" text="Continue">
                <VBox.margin>
-                  <Insets top="210.0" />
+                  <Insets top="220.0" />
                </VBox.margin>
             </Button>
          </children>
