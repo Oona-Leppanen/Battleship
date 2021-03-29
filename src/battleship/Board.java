@@ -126,15 +126,10 @@ public class Board {
 			}
 		}
 	}
-	public boolean lost(Board b) {
-		for (int i = 0; i < b.boardSizeX; i++) {
-			for (int j=0; j < b.boardSizeY; j++) {
-				b.pelilauta[i][j] = 1;
-				System.out.println("Et hävinnyt");
-				return false;
-			}
-		}
-		System.out.println("Hävisit pelin");
-		return true;
-	}
+	public boolean lost() {
+        if (shipsOnBoard.size() == 0) {
+        return true;
+        }
+        return false;
+    }
 }

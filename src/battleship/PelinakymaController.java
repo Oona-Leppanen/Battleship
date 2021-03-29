@@ -198,6 +198,7 @@ public class PelinakymaController {
 					if (!board.shipsOnBoard.get(i).isAlive()) {
 						System.out.println("Laiva on uponnut ruudusta (" + ((board.shipsOnBoard.get(i).coordX)) + "," + ((board.shipsOnBoard.get(i).coordY)) + ")" );
 						board.shipsOnBoard.remove(i);
+						board.lost(); //chekataan häviäminen, TODO tee jotain järkevää tällä metodilla
 					}
 					break;
 				}
@@ -215,7 +216,7 @@ public class PelinakymaController {
 			GridPane.setConstraints(r, x, y);
 			targetGrid.getChildren().add(r);
 			board.pelilauta[x][y] = 2;
-			//targetGrid.setDisable(true); //Comment this row for testing
+			targetGrid.setDisable(true); //Comment this row for testing
 		}
 
 
@@ -231,6 +232,7 @@ public class PelinakymaController {
 				else {
 					shoot(game.playerBoard1, clickEvent);
 				}
+				((Node) clickEvent.getSource()).getParent().setDisable(true);
 			}
 		});	
 	}
