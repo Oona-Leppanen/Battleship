@@ -191,7 +191,7 @@ public class PelinakymaController {
 		for (int i=0; i < board.shipsOnBoard.size(); i++) {
 			System.out.println("Laiva "+i);
 			for (int j=0; j < board.shipsOnBoard.get(i).size; j++) {
-				System.out.println("Koordinaatit ovat: "+board.shipsOnBoard.get(i).onBoard(j));
+				System.out.println("Koordinaatit ovat: "+ board.shipsOnBoard.get(i).onBoard(j));
 				if (board.shipsOnBoard.get(i).onBoard(j)[0] == x && board.shipsOnBoard.get(i).onBoard(j)[1] == y) {
 					board.shipsOnBoard.get(i).gotHit();
 					System.out.println("Thaat's a hit");
