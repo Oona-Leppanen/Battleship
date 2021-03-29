@@ -24,11 +24,11 @@ public class ValiruutuController {
     	GameHolder holder=GameHolder.getInstance();
 		game=holder.getGame();
 		
-    	if(true) {
-    		nextTurn.setText(game.player1);
+    	if(game.player1turn) {
+    		nextTurn.setText("Next is " + game.player1 + "'s turn");
     	}
     	else {
-    		nextTurn.setText(game.player2);
+    		nextTurn.setText("Next is " + game.player2 + "'s turn");
     	}
     }
 
