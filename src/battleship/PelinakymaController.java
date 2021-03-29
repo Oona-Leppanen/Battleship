@@ -205,8 +205,9 @@ public class PelinakymaController {
 					GridPane.setConstraints(r, x, y);
 					targetGrid.getChildren().add(r);
 					game.playerBoard2.pelilauta[x][y] = 2;
+					targetGrid.setDisable(true); //Comment this row for testing
 				}
-				targetGrid.setDisable(true);
+				
 
 
 			}
