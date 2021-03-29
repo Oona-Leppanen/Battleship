@@ -33,12 +33,18 @@ public class Ship {
 	
 	public int[] onBoard(int order) {
 		if (vertical) {
-			int[] coordinates = {this.coordX, this.coordY+order};
+			int [] coordinates = new int[2];
+				coordinates[0] = coordX;
+				coordinates[1] = order;
 			return coordinates;
 		}
-		else {
-			int[] coordinates = {this.coordX+order, this.coordY};
+		if (!vertical) {
+			int [] coordinates = new int[2];
+				coordinates[0] = order;
+				coordinates[1] = coordY;
 			return coordinates;
 		}
+		int[] bootleg = {1,2,3,4,5};
+		return bootleg;
 	}
 }
