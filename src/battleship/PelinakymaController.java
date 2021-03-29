@@ -43,11 +43,8 @@ public class PelinakymaController {
 	public void initialize(){
 		GameHolder holder=GameHolder.getInstance();
 		game=holder.getGame();
-		GridPane gp1=new GridPane();
-		GridPane gp2=new GridPane();
-		Image image=new Image(getClass().getResource("Sea view4.jpg").toExternalForm());
 
-		if(true) {
+		if(game.player1turn) {
 			playLabel.setText(game.player1 + "'s turn");
 		}
 		else {
@@ -60,6 +57,18 @@ public class PelinakymaController {
 		else {
 			x=game.sizeY;
 		}
+		if(game.player1turn) {
+			setBoards(game.playerBoard2);
+		}
+		else {
+			setBoards(game.playerBoard1);
+		}
+
+	}
+	void setBoards(Board board) {
+		GridPane gp1=new GridPane();
+		GridPane gp2=new GridPane();
+		Image image=new Image(getClass().getResource("Sea view4.jpg").toExternalForm());
 		for(int i=0; i<game.sizeX;i++) {
 			for(int j=0;j<game.sizeY;j++) {
 				ImageView view;
@@ -67,7 +76,7 @@ public class PelinakymaController {
 				view.setFitWidth(308/x);
 				view.setFitHeight(308/x);
 				view.setPreserveRatio(true);
-				if(game.playerBoard2.pelilauta[i][j]==0 || game.playerBoard2.pelilauta[i][j]==1) {
+				if(board.pelilauta[i][j]==0 || board.pelilauta[i][j]==1) {
 					addImageListener(view);
 				}
 
@@ -81,12 +90,12 @@ public class PelinakymaController {
 				//r.setOpacity(0.5);
 				GridPane.setConstraints(pane, i, j); // column=0 row=0
 				gp1.getChildren().add(pane); //r
-				if(game.playerBoard2.pelilauta[i][j]==2) {
+				if(board.pelilauta[i][j]==2) {
 					ImageView r= createMiss();
 					GridPane.setConstraints(r, i, j);
 					gp1.getChildren().add(r);
 				}
-				if(game.playerBoard2.pelilauta[i][j]==3) {
+				if(board.pelilauta[i][j]==3) {
 					ImageView r= createHit();
 					GridPane.setConstraints(r, i, j);
 					gp1.getChildren().add(r);
@@ -119,6 +128,7 @@ public class PelinakymaController {
 
 	@FXML
 	void Continue(ActionEvent event) {
+		game.player1turn=!game.player1turn;
 		Node node = (Node) event.getSource(); // Tallennetaan nappi muuttujaan node
 		Stage stage = (Stage) node.getScene().getWindow(); // Haetaan napin scene ja Scenen ikkuna eli Stage-> tallennetaan stage
 		Parent root;
@@ -172,46 +182,56 @@ public class PelinakymaController {
 		return view;
 	}
 
+	void shoot(Board board, MouseEvent clickEvent) {
+		ImageView target= (ImageView) clickEvent.getSource();
+		GridPane targetGrid= (GridPane) target.getParent().getParent();
+		int y = GridPane.getRowIndex(target.getParent());
+		int x = GridPane.getColumnIndex(target.getParent());
+		System.out.println(x + " ja " + y);
+		for (int i=0; i < board.shipsOnBoard.size(); i++) {
+			System.out.println("Laiva "+i);
+			for (int j=0; j < board.shipsOnBoard.get(i).size; j++) {
+				System.out.println("Koordinaatit ovat: "+board.shipsOnBoard.get(i).onBoard(j));
+				if (board.shipsOnBoard.get(i).onBoard(j)[0] == x && board.shipsOnBoard.get(i).onBoard(j)[1] == y) {
+					board.shipsOnBoard.get(i).gotHit();
+					System.out.println("Thaat's a hit");
+					if (!board.shipsOnBoard.get(i).isAlive()) {
+						System.out.println("Laiva on uponnut ruudusta (" + ((board.shipsOnBoard.get(i).coordX)) + "," + ((board.shipsOnBoard.get(i).coordY)) + ")" );
+						board.shipsOnBoard.remove(i);
+					}
+					break;
+				}
+			}
+			//System.out.println("You missed son, on ship number " + i);
+		}
+		if (board.hasAShip(x, y)) {
+			ImageView r= createHit();
+			GridPane.setConstraints(r, x, y);
+			targetGrid.getChildren().add(r);
+			board.pelilauta[x][y] = 3;					
+		}
+		else {
+			ImageView r= createMiss();
+			GridPane.setConstraints(r, x, y);
+			targetGrid.getChildren().add(r);
+			board.pelilauta[x][y] = 2;
+			//targetGrid.setDisable(true); //Comment this row for testing
+		}
+
+
+	}
+
 	private void addImageListener(ImageView image) {
 		image.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent clickEvent) {
-				ImageView target= (ImageView) clickEvent.getSource();
-				GridPane targetGrid= (GridPane) target.getParent().getParent();
-				int y = GridPane.getRowIndex(target.getParent());
-				int x = GridPane.getColumnIndex(target.getParent());
-				for (int i=0; i < game.playerBoard2.shipsOnBoard.size(); i++) {
-					System.out.println("Laiva numero " + i);
-					if (game.playerBoard2.pelilauta[game.playerBoard2.shipsOnBoard.get(i).onBoard(x)[0]][game.playerBoard2.shipsOnBoard.get(i).onBoard(y)[1]] == game.playerBoard2.pelilauta[x][y]) {
-						game.playerBoard2.shipsOnBoard.get(i).gotHit();
-						System.out.println("Thaat's a hit");
-						if (!game.playerBoard2.shipsOnBoard.get(i).isAlive()) {
-							game.playerBoard2.shipsOnBoard.remove(i);
-							System.out.println("Laiva on uponnut ruudusta (" + ((game.playerBoard2.shipsOnBoard.get(i).coordX)+1) + "," + ((game.playerBoard2.shipsOnBoard.get(i).coordY)+1) + ")" );
-						}
-					}
-					else {
-						System.out.println("You missed son, on ship number " + i);
-					}
-				}
-				if (game.playerBoard2.hasAShip(x, y)) {
-					ImageView r= createHit();
-					GridPane.setConstraints(r, x, y);
-					targetGrid.getChildren().add(r);
-					game.playerBoard2.pelilauta[x][y] = 3;					
+				if(game.player1turn) {
+					shoot(game.playerBoard2, clickEvent);
 				}
 				else {
-					ImageView r= createMiss();
-					GridPane.setConstraints(r, x, y);
-					targetGrid.getChildren().add(r);
-					game.playerBoard2.pelilauta[x][y] = 2;
-					targetGrid.setDisable(true); //Comment this row for testing
+					shoot(game.playerBoard1, clickEvent);
 				}
-				
-
-
 			}
-		}
-				);	
+		});	
 	}
 }

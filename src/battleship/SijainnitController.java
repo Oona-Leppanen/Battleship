@@ -303,7 +303,7 @@ public class SijainnitController {
 		image.setOnDragEntered(new EventHandler <DragEvent>() {
 			public void handle(DragEvent event) {
 				/* the drag-and-drop gesture entered the target */
-				System.out.println("onDragEntered");
+				//System.out.println("onDragEntered");
 				/* show to the user that it is an actual gesture target */
 				if (event.getGestureSource() != image &&
 						event.getDragboard().hasString()) {

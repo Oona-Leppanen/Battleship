@@ -12,8 +12,8 @@ public class Game {
     public int cruisers;
     public int battleships;
     public int carriers;
-    
-    boolean board1set=false;
+    boolean player1turn = true;
+    boolean board1set = false;
 
     public Game (String player1, String player2, int sizeX, int sizeY) {
         playerBoard1 = new Board(sizeX, sizeY, Player.P1);

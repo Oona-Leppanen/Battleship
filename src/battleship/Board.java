@@ -27,7 +27,7 @@ public class Board {
 		}
 		return false;
 	}
-	
+
 	public void deleteAShip(Ship s) {
 		if (!s.isAlive()) {
 			if (s.vertical) {
@@ -46,7 +46,7 @@ public class Board {
 			}
 		}
 	}
-	
+
 	public boolean willFit(Ship s, int x, int y) {
 		if (s.vertical) {
 			if (s.size+y <= boardSizeY) {
@@ -58,7 +58,7 @@ public class Board {
 						if ( (j < 0 ) || (j >= boardSizeY) ) {
 							continue;
 						}
-//						System.out.println(i + " and " + j);
+						//						System.out.println(i + " and " + j);
 						if (pelilauta[i][j] == 1) {
 							System.out.println("ei muuten mahdu");
 							return false;
@@ -66,8 +66,8 @@ public class Board {
 					}
 				}
 			} else {
-			System.out.println("ei mahdu laudalle");
-			return false;
+				System.out.println("ei mahdu laudalle");
+				return false;
 			}
 		}
 		if (!s.vertical) {
@@ -82,7 +82,7 @@ public class Board {
 							//							System.out.println("j = " + j);
 							continue;
 						}
-//						System.out.println(j + " and " + i);
+						//						System.out.println(j + " and " + i);
 						if (pelilauta[j][i] == 1) {
 							System.out.println("ei muuten mahdu");
 							return false;
@@ -90,8 +90,8 @@ public class Board {
 					}
 				}
 			} else {
-			System.out.println("ei mahdu laudalle");
-			return false;
+				System.out.println("ei mahdu laudalle");
+				return false;
 			}
 		}
 
@@ -105,13 +105,13 @@ public class Board {
 			if (s.vertical) {
 				for (int i=0; i<s.size; i++) {
 					pelilauta[x][y+i] = 1;
-					shipsOnBoard.add(s);
 				}
+				shipsOnBoard.add(s);
 			} else {
 				for (int i=0; i<s.size; i++) {
 					pelilauta[x+i][y] = 1;
-					shipsOnBoard.add(s);
 				}
+				shipsOnBoard.add(s);
 			}
 			//Will have to adjust to GUI, placeholder print line
 		} else {
@@ -119,13 +119,13 @@ public class Board {
 		}
 	}
 	public void clearBoard() {
-        for (int i=0; i<boardSizeX; i++) {
-            for (int j=0; j<boardSizeY; j++) {
-            	pelilauta[i][j] = 0;
-            	shipsOnBoard.removeAll(shipsOnBoard);
-            }
-        }
-    }
+		for (int i=0; i<boardSizeX; i++) {
+			for (int j=0; j<boardSizeY; j++) {
+				pelilauta[i][j] = 0;
+				shipsOnBoard.removeAll(shipsOnBoard);
+			}
+		}
+	}
 	public boolean lost(Board b) {
 		for (int i = 0; i < b.boardSizeX; i++) {
 			for (int j=0; j < b.boardSizeY; j++) {
