@@ -191,13 +191,14 @@ public class PelinakymaController {
 		for (int i=0; i < board.shipsOnBoard.size(); i++) {
 			System.out.println("Laiva "+i);
 			for (int j=0; j < board.shipsOnBoard.get(i).size; j++) {
-				System.out.println("Koordinaatit ovat: "+ board.shipsOnBoard.get(i).onBoard(j));
+				System.out.println("Koordinaatit ovat: "+ board.shipsOnBoard.get(i).onBoard(j)[0] + "," + board.shipsOnBoard.get(i).onBoard(j)[1]);
 				if (board.shipsOnBoard.get(i).onBoard(j)[0] == x && board.shipsOnBoard.get(i).onBoard(j)[1] == y) {
 					board.shipsOnBoard.get(i).gotHit();
 					System.out.println("Thaat's a hit");
 					if (!board.shipsOnBoard.get(i).isAlive()) {
 						System.out.println("Laiva on uponnut ruudusta (" + ((board.shipsOnBoard.get(i).coordX)) + "," + ((board.shipsOnBoard.get(i).coordY)) + ")" );
 						board.shipsOnBoard.remove(i);
+						board.lost(); //chekataan häviäminen, TODO tee jotain järkevää tällä metodilla
 					}
 					break;
 				}
@@ -215,7 +216,7 @@ public class PelinakymaController {
 			GridPane.setConstraints(r, x, y);
 			targetGrid.getChildren().add(r);
 			board.pelilauta[x][y] = 2;
-			//targetGrid.setDisable(true); //Comment this row for testing
+			targetGrid.setDisable(true); //Comment this row for testing
 		}
 
 
@@ -231,6 +232,7 @@ public class PelinakymaController {
 				else {
 					shoot(game.playerBoard1, clickEvent);
 				}
+				((Node) clickEvent.getSource()).getParent().setDisable(true);
 			}
 		});	
 	}
