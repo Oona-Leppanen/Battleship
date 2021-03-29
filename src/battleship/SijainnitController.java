@@ -1,12 +1,12 @@
 package battleship;
 
-import java.util.concurrent.TimeUnit;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.HPos;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -35,7 +35,9 @@ public class SijainnitController {
 	private Game game;
 	private boolean rotate=false;
 	private boolean success;
-
+	private int size;
+	int x;
+	
 	@FXML
 	private Pane pane;
 
@@ -66,9 +68,9 @@ public class SijainnitController {
 	@FXML
 	private Label rotateLabel;
 
-    @FXML
-    private Label infoLabel;
-	
+	@FXML
+	private Label infoLabel;
+
 	public void initialize(){
 		GameHolder holder=GameHolder.getInstance();
 		game=holder.getGame();
@@ -88,8 +90,6 @@ public class SijainnitController {
 				view=new ImageView(image);
 				view.setFitWidth(330/x);
 				view.setFitHeight(330/x);
-				GridPane.setConstraints(view, i, j);
-				gp.getChildren().add(view);
 				addImageListener(view);
 				view.setPreserveRatio(true);
 
@@ -204,7 +204,7 @@ public class SijainnitController {
 		Parent root;
 		game.playerBoard1.clearBoard();
 		game.playerBoard2.clearBoard();
-		
+
 		try {
 			root=FXMLLoader.load(getClass().getResource("Laivanupotus_aloitusnaytto_2.fxml"));
 		}
@@ -218,7 +218,7 @@ public class SijainnitController {
 		game.board1set=false;
 	}
 
-	public void addImageListener(ImageView image) {
+	private void addImageListener(ImageView image) {
 		image.setOnDragDropped(new EventHandler<DragEvent>() {
 			@Override
 			public void handle(DragEvent dragEvent) {
@@ -226,14 +226,14 @@ public class SijainnitController {
 				success = true;
 				ImageView target= (ImageView) dragEvent.getSource();
 				GridPane targetGrid= (GridPane) target.getParent().getParent();
-				int y = GridPane.getRowIndex(target);
-				int x = GridPane.getColumnIndex(target);
-				if (!game.board1set) {
-					if (game.playerBoard1.willFit(s,x,y)) {
+				int y = GridPane.getRowIndex(target.getParent());
+				int x = GridPane.getColumnIndex(target.getParent());
+				if (!game.board1set) { //check whose turn is to place ships
+					if (game.playerBoard1.willFit(s,x,y)) { //check if ship fits on p1 board
 						infoLabel.setText("Press R to change ships' orientation:");
 						infoLabel.setTextFill(Color.BLACK);
 						infoLabel.setFont(new Font("System", 14));
-						
+
 						Rectangle r= CreateShip(rotate);
 						game.playerBoard1.setAShip(s, x, y);
 						if(rotate) {
@@ -245,14 +245,14 @@ public class SijainnitController {
 						GridPane.setConstraints(r, x, y);
 						targetGrid.getChildren().add(r);
 						dragEvent.setDropCompleted(success);
-						
+
 						dragEvent.consume();
 					}
 					else {
 						infoLabel.setText("Invalid ship placement!");
 						infoLabel.setTextFill(Color.RED);
 						infoLabel.setFont(new Font("System", 18));
-						
+
 						System.out.println("Ei muuten mahtunu");
 						success = false;
 					}
@@ -262,7 +262,7 @@ public class SijainnitController {
 						infoLabel.setText("Press R to change ships' orientation:");
 						infoLabel.setTextFill(Color.BLACK);
 						infoLabel.setFont(new Font("System", 14));
-						
+
 						Rectangle r= CreateShip(rotate);
 						game.playerBoard2.setAShip(s, x, y);
 						if(rotate) {
@@ -281,7 +281,7 @@ public class SijainnitController {
 						infoLabel.setText("Invalid ship placement!");
 						infoLabel.setTextFill(Color.RED);
 						infoLabel.setFont(new Font("System", 16));
-						
+
 						System.out.println("Ei muuten mahtunu");
 						success = false;
 					}
@@ -348,7 +348,6 @@ public class SijainnitController {
 			Rectangle r=(Rectangle) event.getSource();
 			r.setOpacity(0.5);
 			System.out.println("SUCCESS");
-			System.out.println("git");
 		}
 	}
 

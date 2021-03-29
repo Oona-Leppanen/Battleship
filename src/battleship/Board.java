@@ -6,7 +6,7 @@ public class Board {
 	int boardSizeX;
 	int boardSizeY;
 	int[][] pelilauta;
-	ArrayList<Ship> shipsOnBoard;
+	ArrayList<Ship> shipsOnBoard = new ArrayList<Ship>();
 	Player p;
 
 	public Board(int boardSizeX, int boardSizeY, Player p) {
@@ -119,13 +119,13 @@ public class Board {
 		}
 	}
 	public void clearBoard() {
-		for (int i=0; i<boardSizeX; i++) {
-			for (int j=0; j<boardSizeY; j++) {
-				pelilauta[i][j] = 0;
-				shipsOnBoard.removeAll(shipsOnBoard);
-			}
-		}
-	}
+        for (int i=0; i<boardSizeX; i++) {
+            for (int j=0; j<boardSizeY; j++) {
+            	pelilauta[i][j] = 0;
+            	shipsOnBoard.removeAll(shipsOnBoard);
+            }
+        }
+    }
 	public boolean lost(Board b) {
 		for (int i = 0; i < b.boardSizeX; i++) {
 			for (int j=0; j < b.boardSizeY; j++) {
