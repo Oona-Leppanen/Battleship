@@ -273,6 +273,8 @@ public class SijainnitController {
 							GridPane.setColumnSpan(r, size);
 						}
 						GridPane.setConstraints(r, x, y);
+						GridPane.setHalignment(r, HPos.CENTER);
+						GridPane.setValignment(r, VPos.CENTER);
 						targetGrid.getChildren().add(r);
 						dragEvent.setDropCompleted(success);
 
