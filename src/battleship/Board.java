@@ -7,6 +7,7 @@ public class Board {
 	int boardSizeY;
 	int[][] pelilauta;
 	ArrayList<Ship> shipsOnBoard = new ArrayList<Ship>();
+	
 	Player p;
 
 	public Board(int boardSizeX, int boardSizeY, Player p) {

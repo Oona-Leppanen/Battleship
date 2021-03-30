@@ -333,7 +333,7 @@ public class SijainnitController {
 		});
 	}
 	
-	void setSizeShips(Rectangle r) {
+	public void setSizeShips(Rectangle r) {
 		if(r.getParent().equals(destroyerPane)) {
 			size=2;
 			System.out.println("koko 2");

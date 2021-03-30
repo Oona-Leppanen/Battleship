@@ -5,7 +5,7 @@ public class Ship {
 	int size;
 	int hits = 0;
 	boolean alive = true;
-	boolean vertical = true;
+	boolean vertical;
 	int coordX;
 	int coordY;
 

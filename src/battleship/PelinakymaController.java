@@ -18,6 +18,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class PelinakymaController {
@@ -124,6 +126,45 @@ public class PelinakymaController {
 		}
 		playerBoard.getChildren().add(gp2);
 		opponentBoard.getChildren().add(gp1);
+
+		if(game.player1turn) {
+			for(int i=0; i<game.playerBoard1.shipsOnBoard.size(); i++) {
+				gp2.getChildren().add(createShip(233, game.playerBoard1.shipsOnBoard.get(i)));
+			}
+		}
+		else {
+			for(int i=0; i<game.playerBoard2.shipsOnBoard.size(); i++) {
+				gp2.getChildren().add(createShip(233, game.playerBoard2.shipsOnBoard.get(i)));
+			}
+		}
+
+	}
+
+	Rectangle createShip(int boardsize, Ship s) {
+		int a = s.coordX;
+		int b = s.coordY;
+		int c = s.size;
+		int viewsize = boardsize/x;
+		int bordersize = 10/x;
+		int shipw = viewsize*(c-1)+viewsize/3+bordersize*(c-1); //laivan leveys
+		int shiph = viewsize/2+bordersize*2; //laivan korkeus
+
+		if(s.vertical) {
+			Rectangle rec= new Rectangle(shiph, shipw, Color.BLACK);
+			GridPane.setConstraints(rec, a, b);
+			GridPane.setHalignment(rec, HPos.CENTER);
+			GridPane.setValignment(rec, VPos.CENTER);
+			GridPane.setRowSpan(rec, c);
+			return rec;
+		}
+		else {
+			Rectangle rec= new Rectangle(shipw, shiph, Color.BLACK);
+			GridPane.setConstraints(rec, a, b);
+			GridPane.setHalignment(rec, HPos.CENTER);
+			GridPane.setValignment(rec, VPos.CENTER);
+			GridPane.setColumnSpan(rec, c);
+			return rec;
+		}
 	}
 
 	@FXML
