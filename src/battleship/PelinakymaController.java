@@ -263,7 +263,7 @@ public class PelinakymaController {
 					if (!board.shipsOnBoard.get(i).isAlive()) {
 						System.out.println("Laiva on uponnut ruudusta (" + ((board.shipsOnBoard.get(i).coordX)) + "," + ((board.shipsOnBoard.get(i).coordY)) + ")" );
 						board.shipsOnBoard.remove(i);
-						if (board.lost()) { 	//chekataan häviäminen, TODO tee jotain järkevää tällä metodilla
+						if (board.lost()) {
 							loser = true;
 							target.getParent().getParent().setDisable(true);
 							playLabel.setText("Game has ended, click continue to see the winner.");
@@ -278,7 +278,8 @@ public class PelinakymaController {
 			ImageView r= createHit();
 			GridPane.setConstraints(r, x, y);
 			targetGrid.getChildren().add(r);
-			board.pelilauta[x][y] = 3;					
+			board.pelilauta[x][y] = 3;
+			r.setDisable(true);
 		}
 		else {
 			ImageView r= createMiss();
