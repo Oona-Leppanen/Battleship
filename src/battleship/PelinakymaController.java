@@ -26,6 +26,7 @@ public class PelinakymaController {
 
 	private Game game;
 	int x;
+	boolean loser;
 
 	@FXML
 	private Pane playerBoard;
@@ -169,21 +170,38 @@ public class PelinakymaController {
 
 	@FXML
 	void Continue(ActionEvent event) {
-		game.player1turn=!game.player1turn;
-		Node node = (Node) event.getSource(); // Tallennetaan nappi muuttujaan node
-		Stage stage = (Stage) node.getScene().getWindow(); // Haetaan napin scene ja Scenen ikkuna eli Stage-> tallennetaan stage
-		Parent root;
+		if (loser) {
+			Node node = (Node) event.getSource(); // Tallennetaan nappi muuttujaan node
+			Stage stage = (Stage) node.getScene().getWindow(); // Haetaan napin scene ja Scenen ikkuna eli Stage-> tallennetaan stage
+			Parent root;
 
-		try {
-			root=FXMLLoader.load(getClass().getResource("Valiruutu.fxml"));
+			try {
+				root=FXMLLoader.load(getClass().getResource("Loppu.fxml"));
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+				return;
+			}
+			Scene scene= new Scene(root);
+			stage.setScene(scene); // asetetaan uusi Scene
+			stage.show(); // näytetään uusi scene
+		} else {
+			game.player1turn=!game.player1turn;
+			Node node = (Node) event.getSource(); // Tallennetaan nappi muuttujaan node
+			Stage stage = (Stage) node.getScene().getWindow(); // Haetaan napin scene ja Scenen ikkuna eli Stage-> tallennetaan stage
+			Parent root;
+
+			try {
+				root=FXMLLoader.load(getClass().getResource("Valiruutu.fxml"));
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+				return;
+			}
+			Scene scene= new Scene(root);
+			stage.setScene(scene); // asetetaan uusi Scene
+			stage.show(); // näytetään uusi scene
 		}
-		catch(Exception e) {
-			e.printStackTrace();
-			return;
-		}
-		Scene scene= new Scene(root);
-		stage.setScene(scene); // asetetaan uusi Scene
-		stage.show(); // näytetään uusi scene
 	}
 
 	@FXML
@@ -245,7 +263,11 @@ public class PelinakymaController {
 					if (!board.shipsOnBoard.get(i).isAlive()) {
 						System.out.println("Laiva on uponnut ruudusta (" + ((board.shipsOnBoard.get(i).coordX)) + "," + ((board.shipsOnBoard.get(i).coordY)) + ")" );
 						board.shipsOnBoard.remove(i);
-						board.lost(); //chekataan häviäminen, TODO tee jotain järkevää tällä metodilla
+						if (board.lost()) { 	//chekataan häviäminen, TODO tee jotain järkevää tällä metodilla
+							loser = true;
+							target.getParent().getParent().setDisable(true);
+							playLabel.setText("Game has ended, click continue to see the winner.");
+						}
 					}
 					break;
 				}
