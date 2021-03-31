@@ -70,7 +70,7 @@ public class PelinakymaController {
 		}
 
 	}
-	
+
 	/*
 	 * Sets opponents board to bigger pane.
 	 */
@@ -108,13 +108,13 @@ public class PelinakymaController {
 				}
 			}
 		}
-		
+
 		for(int k=0; k<board.sunkShips.size(); k++) {
 			Rectangle r=createShip(308, board.sunkShips.get(k));
 			r.setOpacity(0.5);
 			gp1.getChildren().add(r);
 		}
-		
+
 		opponentBoard.getChildren().add(gp1);
 	}
 
@@ -149,14 +149,14 @@ public class PelinakymaController {
 			r.toBack();
 			gp2.getChildren().add(r);
 		}
-		
+
 		for(int i=0; i<board.sunkShips.size(); i++) {
 			Rectangle r=createShip(233, board.sunkShips.get(i));
 			r.setOpacity(0.5);
 			r.toBack();
 			gp2.getChildren().add(r);
 		}
-		
+
 		for(int i=0; i<game.sizeX;i++) {
 			for(int j=0;j<game.sizeY;j++) {
 				if(board.pelilauta[i][j]==3) {
@@ -263,7 +263,7 @@ public class PelinakymaController {
 		stage.setScene(scene);
 		stage.show();
 	}
-	
+
 	/*
 	 * Creates an imageview to be placed as a hit symbol into GUI.
 	 */
@@ -278,7 +278,7 @@ public class PelinakymaController {
 		view.setPreserveRatio(true);
 		return view;
 	}
-	
+
 	/*
 	 * Creates an imageview to be placed as a miss symbol into GUI.
 	 */
