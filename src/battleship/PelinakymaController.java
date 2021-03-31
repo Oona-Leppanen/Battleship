@@ -293,6 +293,7 @@ public class PelinakymaController {
 			targetGrid.getChildren().add(r);
 			board.pelilauta[x][y] = 2;
 			targetGrid.setDisable(true); //Comment this row for testing
+			continueButton.setDisable(false);
 		}
 
 		for (int i=0; i < board.shipsOnBoard.size(); i++) {

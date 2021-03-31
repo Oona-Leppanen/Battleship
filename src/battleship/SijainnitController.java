@@ -78,12 +78,13 @@ public class SijainnitController {
 		GameHolder holder=GameHolder.getInstance();
 		game=holder.getGame();
 		GridPane gp=new GridPane();
+		continueButton.setDisable(true);
 		Image image=new Image(getClass().getResource("Sea view4.jpg").toExternalForm());
 		if(!game.board1set) {
-			placeLabel.setText(game.player1 + ", place your ships");
+			placeLabel.setText(game.player1 + ", drag to place your ships");
 		}
 		else {
-			placeLabel.setText(game.player2 + ", place your ships");
+			placeLabel.setText(game.player2 + ", drag to place your ships");
 		}
 
 		if(game.sizeX>game.sizeY) {
@@ -380,6 +381,17 @@ public class SijainnitController {
 			Rectangle r=(Rectangle) event.getSource();
 			r.setOpacity(0.5);
 			System.out.println("SUCCESS");
+			if(!game.board1set) {
+				if(game.destroyers+game.battleships+game.carriers+game.cruisers+game.submarines==game.playerBoard1.shipsOnBoard.size()) {
+					continueButton.setDisable(false);
+				}
+			}
+			else {
+				if(game.destroyers+game.battleships+game.carriers+game.cruisers+game.submarines==game.playerBoard2.shipsOnBoard.size()) {
+					continueButton.setDisable(false);
+				}
+			}
+		
 		}
 	}
 
