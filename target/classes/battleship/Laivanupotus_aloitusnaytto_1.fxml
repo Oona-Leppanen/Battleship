@@ -57,12 +57,12 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="p1Input" promptText="Player 1">
+                  <TextField fx:id="p1Input" onInputMethodTextChanged="#checkValue" promptText="Player 1">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </TextField>
-                  <TextField fx:id="p2Input" promptText="Player 2">
+                  <TextField fx:id="p2Input" onInputMethodTextChanged="#checkValue" promptText="Player 2">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>

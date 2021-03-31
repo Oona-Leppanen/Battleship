@@ -46,7 +46,7 @@ public class PelinakymaController {
 	public void initialize(){
 		GameHolder holder=GameHolder.getInstance();
 		game=holder.getGame();
-
+		continueButton.setDisable(true);
 		if(game.player1turn) {
 			playLabel.setText(game.player1 + "'s turn");
 		}
@@ -266,6 +266,7 @@ public class PelinakymaController {
 						if (board.lost()) {
 							loser = true;
 							target.getParent().getParent().setDisable(true);
+							continueButton.setDisable(false);
 							playLabel.setText("Game has ended, click continue to see the winner.");
 						}
 					}
@@ -287,6 +288,7 @@ public class PelinakymaController {
 			targetGrid.getChildren().add(r);
 			board.pelilauta[x][y] = 2;
 			targetGrid.setDisable(true); //Comment this row for testing
+			continueButton.setDisable(false);
 		}
 
 
