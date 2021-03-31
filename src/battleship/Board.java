@@ -7,7 +7,7 @@ public class Board {
 	int boardSizeY;
 	int[][] pelilauta;
 	ArrayList<Ship> shipsOnBoard = new ArrayList<Ship>();
-	
+	ArrayList<Ship> sunkShips = new ArrayList<Ship>();
 	Player p;
 
 	public Board(int boardSizeX, int boardSizeY, Player p) {
@@ -29,21 +29,21 @@ public class Board {
 		return false;
 	}
 
-	public void deleteAShip(Ship s) {
+	public void sinkAShip(Ship s) {
 		if (!s.isAlive()) {
 			if (s.vertical) {
-				for (int i=s.coordX; i < s.coordX+s.size; i++) {
+				//for (int i=s.coordX; i < s.coordX+s.size-1; i++) {
 					for (int j=s.coordY; j < s.coordY+s.size; j++) {
-						pelilauta[i][j] = 0;
+						pelilauta[s.coordX][j] = 4;
 					}
-				}
+				//}
 			}
 			if (!s.vertical) {
-				for (int i=s.coordY; i < s.coordY+s.size; i++) {
+				//for (int i=s.coordY; i < s.coordY+s.size-1; i++) {
 					for (int j=s.coordX; j < s.coordX+s.size; j++) {
-						pelilauta[j][i] = 0;
+						pelilauta[j][s.coordY] = 4;
 					}
-				}
+				//}
 			}
 		}
 	}

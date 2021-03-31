@@ -1,5 +1,6 @@
 package battleship;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -60,17 +61,20 @@ public class PelinakymaController {
 			x=game.sizeY;
 		}
 		if(game.player1turn) {
-			setBoards(game.playerBoard2);
+			setBigBoard(game.playerBoard2);
+			setMiniBoard(game.playerBoard1);
 		}
 		else {
-			setBoards(game.playerBoard1);
+			setBigBoard(game.playerBoard1);
+			setMiniBoard(game.playerBoard2);
 		}
 
 	}
-	void setBoards(Board board) {
+	
+	void setBigBoard(Board board) {
 		GridPane gp1=new GridPane();
-		GridPane gp2=new GridPane();
 		Image image=new Image(getClass().getResource("Sea view4.jpg").toExternalForm());
+
 		for(int i=0; i<game.sizeX;i++) {
 			for(int j=0;j<game.sizeY;j++) {
 				ImageView view;
@@ -93,17 +97,40 @@ public class PelinakymaController {
 				GridPane.setConstraints(pane, i, j); // column=0 row=0
 				gp1.getChildren().add(pane); //r
 				if(board.pelilauta[i][j]==2) {
-					ImageView r= createMiss();
+					ImageView r= createMiss(308);
 					GridPane.setConstraints(r, i, j);
 					gp1.getChildren().add(r);
 				}
 				if(board.pelilauta[i][j]==3) {
-					ImageView r= createHit();
+					ImageView r= createHit(308);
 					GridPane.setConstraints(r, i, j);
 					gp1.getChildren().add(r);
 				}
 			}
 		}
+		
+		for(int k=0; k<board.sunkShips.size(); k++) {
+			Rectangle r=createShip(308, board.sunkShips.get(k));
+			r.setOpacity(0.5);
+			gp1.getChildren().add(r);
+		}
+		
+		opponentBoard.getChildren().add(gp1);
+
+		/*for(int i=0; i<board.shipsOnBoard.size(); i++) {
+			gp1.getChildren().add(createShip(233, board.shipsOnBoard.get(i)));
+		}
+		for(int i=0; i<board.sunkShips.size(); i++) {
+			Rectangle r=createShip(233, board.sunkShips.get(i));
+			r.setOpacity(0.5);
+			gp1.getChildren().add(r);
+		}*/
+	}
+
+	void setMiniBoard(Board board) {
+		GridPane gp2=new GridPane();
+		Image image=new Image(getClass().getResource("Sea view4.jpg").toExternalForm());
+
 		for(int i=0; i<game.sizeX;i++) {
 			for(int j=0;j<game.sizeY;j++) {
 				ImageView view;
@@ -125,19 +152,34 @@ public class PelinakymaController {
 			}
 		}
 		playerBoard.getChildren().add(gp2);
-		opponentBoard.getChildren().add(gp1);
 
-		if(game.player1turn) {
-			for(int i=0; i<game.playerBoard1.shipsOnBoard.size(); i++) {
-				gp2.getChildren().add(createShip(233, game.playerBoard1.shipsOnBoard.get(i)));
+		for(int i=0; i<board.shipsOnBoard.size(); i++) {
+			Rectangle r=createShip(233, board.shipsOnBoard.get(i));
+			r.toBack();
+			gp2.getChildren().add(r);
+		}
+		
+		for(int i=0; i<board.sunkShips.size(); i++) {
+			Rectangle r=createShip(233, board.sunkShips.get(i));
+			r.setOpacity(0.5);
+			r.toBack();
+			gp2.getChildren().add(r);
+		}
+		
+		for(int i=0; i<game.sizeX;i++) {
+			for(int j=0;j<game.sizeY;j++) {
+				if(board.pelilauta[i][j]==3) {
+					ImageView r= createHit(233);
+					GridPane.setConstraints(r, i, j);
+					gp2.getChildren().add(r);
+				}
+				if(board.pelilauta[i][j]==2) {
+					ImageView r= createMiss(233);
+					GridPane.setConstraints(r, i, j);
+					gp2.getChildren().add(r);
+				}
 			}
 		}
-		else {
-			for(int i=0; i<game.playerBoard2.shipsOnBoard.size(); i++) {
-				gp2.getChildren().add(createShip(233, game.playerBoard2.shipsOnBoard.get(i)));
-			}
-		}
-
 	}
 
 	Rectangle createShip(int boardsize, Ship s) {
@@ -204,24 +246,25 @@ public class PelinakymaController {
 		stage.show(); // näytetään uusi scene
 	}
 
-	public ImageView createHit() {
+	public ImageView createHit(int boardsize) {
 		Image image=new Image(getClass().getResource("hit.png").toExternalForm());
 		ImageView view=new ImageView(image);
 		GridPane.setHalignment(view, HPos.CENTER);
 		GridPane.setValignment(view, VPos.CENTER);
-		int gridsize = 308/x;
+		int gridsize = boardsize/x;
 		view.setFitWidth(gridsize*4/5);
 		view.setFitHeight(gridsize*4/5);
 		addImageListener(view);
 		view.setPreserveRatio(true);
+		view.setDisable(true);
 		return view;
 	}
-	public ImageView createMiss() {
+	public ImageView createMiss(int boardsize) {
 		Image image=new Image(getClass().getResource("miss.jpg").toExternalForm());
 		ImageView view=new ImageView(image);
 		GridPane.setHalignment(view, HPos.CENTER);
 		GridPane.setValignment(view, VPos.CENTER);
-		int gridsize = 308/x;
+		int gridsize = boardsize/x;
 		view.setFitWidth(gridsize*4/5);
 		view.setFitHeight(gridsize*4/5);
 		addImageListener(view);
@@ -235,6 +278,21 @@ public class PelinakymaController {
 		int y = GridPane.getRowIndex(target.getParent());
 		int x = GridPane.getColumnIndex(target.getParent());
 		System.out.println(x + " ja " + y);
+
+		if (board.hasAShip(x, y)) {
+			ImageView r= createHit(308);
+			GridPane.setConstraints(r, x, y);
+			targetGrid.getChildren().add(r);
+			board.pelilauta[x][y] = 3;
+		}
+		else if(board.pelilauta[x][y]==0) {
+			ImageView r= createMiss(308);
+			GridPane.setConstraints(r, x, y);
+			targetGrid.getChildren().add(r);
+			board.pelilauta[x][y] = 2;
+			targetGrid.setDisable(true); //Comment this row for testing
+		}
+
 		for (int i=0; i < board.shipsOnBoard.size(); i++) {
 			System.out.println("Laiva "+i);
 			for (int j=0; j < board.shipsOnBoard.get(i).size; j++) {
@@ -244,6 +302,14 @@ public class PelinakymaController {
 					System.out.println("Thaat's a hit");
 					if (!board.shipsOnBoard.get(i).isAlive()) {
 						System.out.println("Laiva on uponnut ruudusta (" + ((board.shipsOnBoard.get(i).coordX)) + "," + ((board.shipsOnBoard.get(i).coordY)) + ")" );
+						board.sinkAShip(board.shipsOnBoard.get(i));
+						board.sunkShips.add(board.shipsOnBoard.get(i));
+						removeHits(board.shipsOnBoard.get(i));
+
+						Rectangle r=createShip(308, board.shipsOnBoard.get(i));
+						r.setOpacity(0.5);
+						((GridPane) opponentBoard.getChildren().get(0)).getChildren().add(r);
+
 						board.shipsOnBoard.remove(i);
 						board.lost(); //chekataan häviäminen, TODO tee jotain järkevää tällä metodilla
 					}
@@ -252,21 +318,31 @@ public class PelinakymaController {
 			}
 			//System.out.println("You missed son, on ship number " + i);
 		}
-		if (board.hasAShip(x, y)) {
-			ImageView r= createHit();
-			GridPane.setConstraints(r, x, y);
-			targetGrid.getChildren().add(r);
-			board.pelilauta[x][y] = 3;					
+	}
+
+	void removeHits(Ship s) {
+		GridPane gp = ((GridPane) opponentBoard.getChildren().get(0));
+		for(int i=0; i<s.size; i++) {
+			ImageView node = getNodeByRowColumnIndex(s.onBoard(i)[1], s.onBoard(i)[0], gp);
+			gp.getChildren().remove(node);
 		}
-		else {
-			ImageView r= createMiss();
-			GridPane.setConstraints(r, x, y);
-			targetGrid.getChildren().add(r);
-			board.pelilauta[x][y] = 2;
-			targetGrid.setDisable(true); //Comment this row for testing
+	}
+
+	//https://stackoverflow.com/questions/20825935/javafx-get-node-by-row-and-column
+	public ImageView getNodeByRowColumnIndex (final int row, final int column, GridPane gridPane) {
+		ImageView result = null;
+		ObservableList<Node> childrens = gridPane.getChildren();
+
+		for (Node node : childrens) {
+			if(GridPane.getRowIndex(node) == row && GridPane.getColumnIndex(node) == column) {
+				if(node.equals(ImageView.class)) {
+					result = (ImageView) node;
+					break;
+				}
+			}
 		}
 
-
+		return result;
 	}
 
 	private void addImageListener(ImageView image) {
