@@ -64,7 +64,7 @@ public class SijainnitController {
 
 	@FXML
 	private Button continueButton;
-	
+
 	@FXML
 	private Label placeLabel;
 
@@ -74,8 +74,12 @@ public class SijainnitController {
 	@FXML
 	private Label infoLabel;
 
+
+	/*
+	 * Set graphical game board and disable unused ships.
+	 */
 	public void initialize(){
-		GameHolder holder=GameHolder.getInstance();
+		GameHolder holder=GameHolder.getInstance(); //Load game data from GameHolder
 		game=holder.getGame();
 		GridPane gp=new GridPane();
 		continueButton.setDisable(true);
@@ -107,14 +111,9 @@ public class SijainnitController {
 				pane.setPrefHeight(340/x);
 				pane.setAlignment(Pos.CENTER);
 				pane.setStyle("-fx-background-color: black");
-				//view.setSmooth(true);
-				//view.setCache(true);
-				//Rectangle r= new Rectangle(330/x,330/x,Color.WHITE);
-				//r.setStroke(Color.BLACK);
-				//r.setOpacity(0.5);
 
 				GridPane.setConstraints(pane, i, j); // column=0 row=0
-				gp.getChildren().add(pane);//r
+				gp.getChildren().add(pane);
 			}
 		}
 
@@ -150,10 +149,14 @@ public class SijainnitController {
 		}
 	}
 
+
+	/*
+	 * Moves to Valiruutu if both boards are set.
+	 */
 	@FXML
 	void Continue(ActionEvent event) {
-		Node node = (Node) event.getSource(); // Tallennetaan nappi muuttujaan node
-		Stage stage = (Stage) node.getScene().getWindow(); // Haetaan napin scene ja Scenen ikkuna eli Stage-> tallennetaan stage
+		Node node = (Node) event.getSource();
+		Stage stage = (Stage) node.getScene().getWindow();
 		if(!game.board1set) {
 			game.board1set=true;
 			Parent root;
@@ -165,8 +168,8 @@ public class SijainnitController {
 				return;
 			}
 			Scene scene= new Scene(root);
-			stage.setScene(scene); // asetetaan uusi Scene
-			stage.show(); // näytetään uusi scene
+			stage.setScene(scene);
+			stage.show();
 		}
 		else {
 			Parent root;
@@ -179,15 +182,19 @@ public class SijainnitController {
 				return;
 			}
 			Scene scene= new Scene(root);
-			stage.setScene(scene); // asetetaan uusi Scene
-			stage.show(); // näytetään uusi scene
+			stage.setScene(scene);
+			stage.show();
 		}
 	}
 
+
+	/*
+	 * Resets screen and active player's ship placement.
+	 */
 	@FXML
 	void Reset(ActionEvent event) {
-		Node node = (Node) event.getSource(); // Tallennetaan nappi muuttujaan node
-		Stage stage = (Stage) node.getScene().getWindow(); // Haetaan napin scene ja Scenen ikkuna eli Stage-> tallennetaan stage
+		Node node = (Node) event.getSource();
+		Stage stage = (Stage) node.getScene().getWindow();
 		Parent root;
 		if(game.board1set) {
 			game.playerBoard2.clearBoard();
@@ -202,14 +209,17 @@ public class SijainnitController {
 			return;
 		}
 		Scene scene= new Scene(root);
-		stage.setScene(scene); // asetetaan uusi Scene
-		stage.show(); // näytetään uusi scene
+		stage.setScene(scene);
+		stage.show();
 	}
 
+	/*
+	 * Return to Laivanupotus_aloitusnaytto_2.
+	 */
 	@FXML
 	void Back(ActionEvent event) {
-		Node node = (Node) event.getSource(); // Tallennetaan nappi muuttujaan node
-		Stage stage = (Stage) node.getScene().getWindow(); // Haetaan napin scene ja Scenen ikkuna eli Stage-> tallennetaan stage
+		Node node = (Node) event.getSource();
+		Stage stage = (Stage) node.getScene().getWindow();
 		Parent root;
 		game.playerBoard1.clearBoard();
 		game.playerBoard2.clearBoard();
@@ -222,11 +232,14 @@ public class SijainnitController {
 			return;
 		}
 		Scene scene= new Scene(root);
-		stage.setScene(scene); // asetetaan uusi Scene
-		stage.show(); // näytetään uusi scene
+		stage.setScene(scene);
+		stage.show();
 		game.board1set=false;
 	}
 
+	/*
+	 * Set required action listeners for dropping ships on to the board.
+	 */
 	private void addImageListener(ImageView image) {
 		image.setOnDragDropped(new EventHandler<DragEvent>() {
 			@Override
@@ -263,8 +276,6 @@ public class SijainnitController {
 						infoLabel.setText("Invalid ship placement!");
 						infoLabel.setTextFill(Color.RED);
 						infoLabel.setFont(new Font("System", 18));
-
-						System.out.println("Ei muuten mahtunu");
 						success = false;
 					}
 				}
@@ -294,8 +305,6 @@ public class SijainnitController {
 						infoLabel.setText("Invalid ship placement!");
 						infoLabel.setTextFill(Color.RED);
 						infoLabel.setFont(new Font("System", 16));
-
-						System.out.println("Ei muuten mahtunu");
 						success = false;
 					}
 				}
@@ -314,12 +323,8 @@ public class SijainnitController {
 
 		image.setOnDragEntered(new EventHandler <DragEvent>() {
 			public void handle(DragEvent event) {
-				/* the drag-and-drop gesture entered the target */
-				//System.out.println("onDragEntered");
-				/* show to the user that it is an actual gesture target */
 				if (event.getGestureSource() != image &&
 						event.getDragboard().hasString()) {
-					System.out.println("ASIAA!");
 				}
 
 				event.consume();
@@ -328,31 +333,32 @@ public class SijainnitController {
 
 		image.setOnDragExited(new EventHandler <DragEvent>() {
 			public void handle(DragEvent event) {
-				/* mouse moved away, remove the graphical cues */
 				event.consume();
 			}
 		});
 	}
-	
+
+	/*
+	 * Sets the size of the created ships dynamically.
+	 */
 	public void setSizeShips(Rectangle r) {
 		if(r.getParent().equals(destroyerPane)) {
 			size=2;
-			System.out.println("koko 2");
 		}
 		else if(r.getParent().equals(submarinePane) || r.getParent().equals(cruiserPane)) {
 			size=3;
-			System.out.println("koko 3");
 		}
 		else if(r.getParent().equals(battleshipPane)) {
 			size=4;
-			System.out.println("koko 4");
 		}
 		else if(r.getParent().equals(carrierPane)) {
 			size=5;
-			System.out.println("koko 5");
 		}
 	}
-	
+
+	/*
+	 * Action listener for starting ship drag and drop.
+	 */
 	@FXML
 	void dragShip(MouseEvent event) {
 		Rectangle r= (Rectangle) event.getSource();
@@ -375,12 +381,14 @@ public class SijainnitController {
 		}
 	}
 
+	/*
+	 * Action listener for drag completed.
+	 */
 	@FXML
 	void dragComplete(DragEvent event) {
 		if(success) {
 			Rectangle r=(Rectangle) event.getSource();
 			r.setOpacity(0.5);
-			System.out.println("SUCCESS");
 			if(!game.board1set) {
 				if(game.destroyers+game.battleships+game.carriers+game.cruisers+game.submarines==game.playerBoard1.shipsOnBoard.size()) {
 					continueButton.setDisable(false);
@@ -391,10 +399,13 @@ public class SijainnitController {
 					continueButton.setDisable(false);
 				}
 			}
-		
+
 		}
 	}
 
+	/*
+	 * Toggle rotate if r button is pressed.
+	 */
 	@FXML
 	void toggleRotate(KeyEvent event) {
 		if(event.getText().equals("r")){
@@ -408,11 +419,14 @@ public class SijainnitController {
 		}
 	}
 
+	/*
+	 * Create GUI ship.
+	 */
 	public Rectangle CreateShip(boolean rotate) {
 		int viewsize = 330/x;
 		int bordersize = 10/x;
-		int shipw = viewsize*(size-1)+viewsize/3+bordersize*(size-1); //laivan leveys
-		int shiph = viewsize/2+bordersize*2; //laivan korkeus
+		int shipw = viewsize*(size-1)+viewsize/3+bordersize*(size-1); //ship's width
+		int shiph = viewsize/2+bordersize*2; //ship's height
 		if(rotate) {
 			Rectangle rec= new Rectangle(shiph, shipw, Color.BLACK);
 			return rec;
@@ -421,6 +435,5 @@ public class SijainnitController {
 			Rectangle rec= new Rectangle(shipw, shiph, Color.BLACK);
 			return rec;
 		}
-
 	}
 }

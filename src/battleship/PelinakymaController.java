@@ -44,7 +44,7 @@ public class PelinakymaController {
 	private Button continueButton;
 
 	public void initialize(){
-		GameHolder holder=GameHolder.getInstance();
+		GameHolder holder=GameHolder.getInstance(); //Load game data from GameHolder
 		game=holder.getGame();
 		continueButton.setDisable(true);
 		if(game.player1turn) {
@@ -71,6 +71,9 @@ public class PelinakymaController {
 
 	}
 	
+	/*
+	 * Sets opponents board to bigger pane.
+	 */
 	void setBigBoard(Board board) {
 		GridPane gp1=new GridPane();
 		Image image=new Image(getClass().getResource("Sea view4.jpg").toExternalForm());
@@ -91,11 +94,8 @@ public class PelinakymaController {
 				pane.setPrefHeight(315/x);
 				pane.setAlignment(Pos.CENTER);
 				pane.setStyle("-fx-background-color: black");
-				//Rectangle r= new Rectangle(300/x,300/x,Color.WHITE);
-				//r.setStroke(Color.BLACK);
-				//r.setOpacity(0.5);
 				GridPane.setConstraints(pane, i, j); // column=0 row=0
-				gp1.getChildren().add(pane); //r
+				gp1.getChildren().add(pane);
 				if(board.pelilauta[i][j]==2) {
 					ImageView r= createMiss(308);
 					GridPane.setConstraints(r, i, j);
@@ -118,6 +118,9 @@ public class PelinakymaController {
 		opponentBoard.getChildren().add(gp1);
 	}
 
+	/*
+	 * Sets player's own board to smaller pane.
+	 */
 	void setMiniBoard(Board board) {
 		GridPane gp2=new GridPane();
 		Image image=new Image(getClass().getResource("Sea view4.jpg").toExternalForm());
@@ -170,14 +173,17 @@ public class PelinakymaController {
 		}
 	}
 
+	/*
+	 * Creates GUI ship using game logic's ship data and board size.
+	 */
 	Rectangle createShip(int boardsize, Ship s) {
 		int a = s.coordX;
 		int b = s.coordY;
 		int c = s.size;
 		int viewsize = boardsize/x;
 		int bordersize = 10/x;
-		int shipw = viewsize*(c-1)+viewsize/3+bordersize*(c-1); //laivan leveys
-		int shiph = viewsize/2+bordersize*2; //laivan korkeus
+		int shipw = viewsize*(c-1)+viewsize/3+bordersize*(c-1); //ship's width
+		int shiph = viewsize/2+bordersize*2; //ship's height
 
 		if(s.vertical) {
 			Rectangle rec= new Rectangle(shiph, shipw, Color.BLACK);
@@ -197,11 +203,14 @@ public class PelinakymaController {
 		}
 	}
 
+	/*
+	 * If game has ended move to end screen, else continue turn order.
+	 */
 	@FXML
 	void Continue(ActionEvent event) {
 		if (loser) {
-			Node node = (Node) event.getSource(); // Tallennetaan nappi muuttujaan node
-			Stage stage = (Stage) node.getScene().getWindow(); // Haetaan napin scene ja Scenen ikkuna eli Stage-> tallennetaan stage
+			Node node = (Node) event.getSource();
+			Stage stage = (Stage) node.getScene().getWindow();
 			Parent root;
 
 			try {
@@ -212,12 +221,13 @@ public class PelinakymaController {
 				return;
 			}
 			Scene scene= new Scene(root);
-			stage.setScene(scene); // asetetaan uusi Scene
-			stage.show(); // näytetään uusi scene
-		} else {
+			stage.setScene(scene);
+			stage.show();
+		}
+		else {
 			game.player1turn=!game.player1turn;
-			Node node = (Node) event.getSource(); // Tallennetaan nappi muuttujaan node
-			Stage stage = (Stage) node.getScene().getWindow(); // Haetaan napin scene ja Scenen ikkuna eli Stage-> tallennetaan stage
+			Node node = (Node) event.getSource();
+			Stage stage = (Stage) node.getScene().getWindow();
 			Parent root;
 
 			try {
@@ -228,15 +238,18 @@ public class PelinakymaController {
 				return;
 			}
 			Scene scene= new Scene(root);
-			stage.setScene(scene); // asetetaan uusi Scene
-			stage.show(); // näytetään uusi scene
+			stage.setScene(scene);
+			stage.show();
 		}
 	}
 
+	/*
+	 * Quit to Laivanupotus_aloitusnaytto_1.
+	 */
 	@FXML
 	void Quit(ActionEvent event) {
-		Node node = (Node) event.getSource(); // Tallennetaan nappi muuttujaan node
-		Stage stage = (Stage) node.getScene().getWindow(); // Haetaan napin scene ja Scenen ikkuna eli Stage-> tallennetaan stage
+		Node node = (Node) event.getSource();
+		Stage stage = (Stage) node.getScene().getWindow();
 		Parent root;
 
 		try {
@@ -247,10 +260,13 @@ public class PelinakymaController {
 			return;
 		}
 		Scene scene= new Scene(root);
-		stage.setScene(scene); // asetetaan uusi Scene
-		stage.show(); // näytetään uusi scene
+		stage.setScene(scene);
+		stage.show();
 	}
-
+	
+	/*
+	 * Creates an imageview to be placed as a hit symbol into GUI.
+	 */
 	public ImageView createHit(int boardsize) {
 		Image image=new Image(getClass().getResource("hit.png").toExternalForm());
 		ImageView view=new ImageView(image);
@@ -262,6 +278,10 @@ public class PelinakymaController {
 		view.setPreserveRatio(true);
 		return view;
 	}
+	
+	/*
+	 * Creates an imageview to be placed as a miss symbol into GUI.
+	 */
 	public ImageView createMiss(int boardsize) {
 		Image image=new Image(getClass().getResource("miss.jpg").toExternalForm());
 		ImageView view=new ImageView(image);
@@ -274,12 +294,14 @@ public class PelinakymaController {
 		return view;
 	}
 
+	/*
+	 * Method for shooting.
+	 */
 	void shoot(Board board, MouseEvent clickEvent) {
 		ImageView target= (ImageView) clickEvent.getSource();
 		GridPane targetGrid= (GridPane) target.getParent().getParent();
 		int y = GridPane.getRowIndex(target.getParent());
 		int x = GridPane.getColumnIndex(target.getParent());
-		System.out.println(x + " ja " + y);
 
 		if (board.hasAShip(x, y)) {
 			ImageView r= createHit(308);
@@ -292,19 +314,15 @@ public class PelinakymaController {
 			GridPane.setConstraints(r, x, y);
 			targetGrid.getChildren().add(r);
 			board.pelilauta[x][y] = 2;
-			targetGrid.setDisable(true); //Comment this row for testing
+			targetGrid.setDisable(true);
 			continueButton.setDisable(false);
 		}
 
 		for (int i=0; i < board.shipsOnBoard.size(); i++) {
-			System.out.println("Laiva "+i);
 			for (int j=0; j < board.shipsOnBoard.get(i).size; j++) {
-				System.out.println("Koordinaatit ovat: "+ board.shipsOnBoard.get(i).onBoard(j)[0] + "," + board.shipsOnBoard.get(i).onBoard(j)[1]);
 				if (board.shipsOnBoard.get(i).onBoard(j)[0] == x && board.shipsOnBoard.get(i).onBoard(j)[1] == y) {
 					board.shipsOnBoard.get(i).gotHit();
-					System.out.println("Thaat's a hit");
 					if (!board.shipsOnBoard.get(i).isAlive()) {
-						System.out.println("Laiva on uponnut ruudusta (" + ((board.shipsOnBoard.get(i).coordX)) + "," + ((board.shipsOnBoard.get(i).coordY)) + ")" );
 						board.sinkAShip(board.shipsOnBoard.get(i));
 						board.sunkShips.add(board.shipsOnBoard.get(i));
 
@@ -327,6 +345,9 @@ public class PelinakymaController {
 		}
 	}
 
+	/*
+	 * Add action listener to GUI gridpane images.
+	 */
 	private void addImageListener(ImageView image) {
 		image.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
