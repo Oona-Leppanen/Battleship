@@ -42,7 +42,7 @@
             </Label>
          </top>
          <center>
-            <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="256.0" prefWidth="169.0" BorderPane.alignment="CENTER">
+            <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="256.0" BorderPane.alignment="CENTER">
                <children>
                   <Label alignment="CENTER" text="Winner:" textFill="#0c0c0c">
                      <font>
@@ -52,7 +52,7 @@
                         <Insets />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="winnerLabel" alignment="CENTER" prefHeight="75.0" prefWidth="169.0" text="Player 1" textFill="#fefbfb">
+                  <Label fx:id="winnerLabel" alignment="CENTER" prefHeight="75.0" text="Player 1" textFill="#fefbfb">
                      <font>
                         <Font size="48.0" />
                      </font>

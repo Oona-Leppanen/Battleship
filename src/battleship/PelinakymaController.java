@@ -1,6 +1,5 @@
 package battleship;
 
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -27,6 +26,7 @@ public class PelinakymaController {
 
 	private Game game;
 	int x;
+	boolean loser;
 
 	@FXML
 	private Pane playerBoard;
@@ -116,15 +116,6 @@ public class PelinakymaController {
 		}
 		
 		opponentBoard.getChildren().add(gp1);
-
-		/*for(int i=0; i<board.shipsOnBoard.size(); i++) {
-			gp1.getChildren().add(createShip(233, board.shipsOnBoard.get(i)));
-		}
-		for(int i=0; i<board.sunkShips.size(); i++) {
-			Rectangle r=createShip(233, board.sunkShips.get(i));
-			r.setOpacity(0.5);
-			gp1.getChildren().add(r);
-		}*/
 	}
 
 	void setMiniBoard(Board board) {
@@ -144,11 +135,8 @@ public class PelinakymaController {
 				pane.setPrefHeight(240/x);
 				pane.setAlignment(Pos.CENTER);
 				pane.setStyle("-fx-background-color: black");
-				//Rectangle r= new Rectangle(240/x,240/x,Color.WHITE);
-				//r.setStroke(Color.BLACK);
-				//r.setOpacity(0.5);
 				GridPane.setConstraints(pane, i, j); // column=0 row=0
-				gp2.getChildren().add(pane); //r
+				gp2.getChildren().add(pane);
 			}
 		}
 		playerBoard.getChildren().add(gp2);
@@ -211,21 +199,38 @@ public class PelinakymaController {
 
 	@FXML
 	void Continue(ActionEvent event) {
-		game.player1turn=!game.player1turn;
-		Node node = (Node) event.getSource(); // Tallennetaan nappi muuttujaan node
-		Stage stage = (Stage) node.getScene().getWindow(); // Haetaan napin scene ja Scenen ikkuna eli Stage-> tallennetaan stage
-		Parent root;
+		if (loser) {
+			Node node = (Node) event.getSource(); // Tallennetaan nappi muuttujaan node
+			Stage stage = (Stage) node.getScene().getWindow(); // Haetaan napin scene ja Scenen ikkuna eli Stage-> tallennetaan stage
+			Parent root;
 
-		try {
-			root=FXMLLoader.load(getClass().getResource("Valiruutu.fxml"));
+			try {
+				root=FXMLLoader.load(getClass().getResource("Loppu.fxml"));
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+				return;
+			}
+			Scene scene= new Scene(root);
+			stage.setScene(scene); // asetetaan uusi Scene
+			stage.show(); // näytetään uusi scene
+		} else {
+			game.player1turn=!game.player1turn;
+			Node node = (Node) event.getSource(); // Tallennetaan nappi muuttujaan node
+			Stage stage = (Stage) node.getScene().getWindow(); // Haetaan napin scene ja Scenen ikkuna eli Stage-> tallennetaan stage
+			Parent root;
+
+			try {
+				root=FXMLLoader.load(getClass().getResource("Valiruutu.fxml"));
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+				return;
+			}
+			Scene scene= new Scene(root);
+			stage.setScene(scene); // asetetaan uusi Scene
+			stage.show(); // näytetään uusi scene
 		}
-		catch(Exception e) {
-			e.printStackTrace();
-			return;
-		}
-		Scene scene= new Scene(root);
-		stage.setScene(scene); // asetetaan uusi Scene
-		stage.show(); // näytetään uusi scene
 	}
 
 	@FXML
@@ -254,9 +259,7 @@ public class PelinakymaController {
 		int gridsize = boardsize/x;
 		view.setFitWidth(gridsize*4/5);
 		view.setFitHeight(gridsize*4/5);
-		addImageListener(view);
 		view.setPreserveRatio(true);
-		view.setDisable(true);
 		return view;
 	}
 	public ImageView createMiss(int boardsize) {
@@ -267,7 +270,6 @@ public class PelinakymaController {
 		int gridsize = boardsize/x;
 		view.setFitWidth(gridsize*4/5);
 		view.setFitHeight(gridsize*4/5);
-		addImageListener(view);
 		view.setPreserveRatio(true);
 		return view;
 	}
@@ -304,45 +306,24 @@ public class PelinakymaController {
 						System.out.println("Laiva on uponnut ruudusta (" + ((board.shipsOnBoard.get(i).coordX)) + "," + ((board.shipsOnBoard.get(i).coordY)) + ")" );
 						board.sinkAShip(board.shipsOnBoard.get(i));
 						board.sunkShips.add(board.shipsOnBoard.get(i));
-						removeHits(board.shipsOnBoard.get(i));
 
 						Rectangle r=createShip(308, board.shipsOnBoard.get(i));
 						r.setOpacity(0.5);
 						((GridPane) opponentBoard.getChildren().get(0)).getChildren().add(r);
 
 						board.shipsOnBoard.remove(i);
-						board.lost(); //chekataan häviäminen, TODO tee jotain järkevää tällä metodilla
+						if (board.lost()) {
+							loser = true;
+							target.getParent().getParent().setDisable(true);
+							playLabel.setText("Game has ended. Click continue to see the winner.");
+							playLabel.setTextFill(Color.RED);
+						}
 					}
 					break;
 				}
 			}
 			//System.out.println("You missed son, on ship number " + i);
 		}
-	}
-
-	void removeHits(Ship s) {
-		GridPane gp = ((GridPane) opponentBoard.getChildren().get(0));
-		for(int i=0; i<s.size; i++) {
-			ImageView node = getNodeByRowColumnIndex(s.onBoard(i)[1], s.onBoard(i)[0], gp);
-			gp.getChildren().remove(node);
-		}
-	}
-
-	//https://stackoverflow.com/questions/20825935/javafx-get-node-by-row-and-column
-	public ImageView getNodeByRowColumnIndex (final int row, final int column, GridPane gridPane) {
-		ImageView result = null;
-		ObservableList<Node> childrens = gridPane.getChildren();
-
-		for (Node node : childrens) {
-			if(GridPane.getRowIndex(node) == row && GridPane.getColumnIndex(node) == column) {
-				if(node.equals(ImageView.class)) {
-					result = (ImageView) node;
-					break;
-				}
-			}
-		}
-
-		return result;
 	}
 
 	private void addImageListener(ImageView image) {
@@ -359,4 +340,4 @@ public class PelinakymaController {
 			}
 		});	
 	}
-}
+} 
