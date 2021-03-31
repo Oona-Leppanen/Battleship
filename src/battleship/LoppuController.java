@@ -27,7 +27,7 @@ public class LoppuController {
     	GameHolder holder=GameHolder.getInstance();
 		game=holder.getGame();
 		
-    	if(true) {
+    	if(game.player1turn) {
     		winnerLabel.setText(game.player1);
     	}
     	else {

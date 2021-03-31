@@ -43,6 +43,7 @@ public class Aloitus1Controller {
     	}
     }
     
+    //Game initialization and next GUI screen transition
     @FXML
     void ButtonPressed(ActionEvent event) {
     	Game game=new Game(p1Input.getText(), p2Input.getText(), widthChooser.getValue(), heightChooser.getValue());
