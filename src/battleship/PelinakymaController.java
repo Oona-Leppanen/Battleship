@@ -240,7 +240,7 @@ public class PelinakymaController {
 		Parent root;
 
 		try {
-			root=FXMLLoader.load(getClass().getResource("Loppu.fxml"));
+			root=FXMLLoader.load(getClass().getResource("Laivanupotus_aloitusnaytto_1.fxml"));
 		}
 		catch(Exception e) {
 			e.printStackTrace();
