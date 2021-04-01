@@ -10,6 +10,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+/*
+ * Controls Loppu.fxml and enables quiting the game and starting a new game.
+ */
 public class LoppuController {
 
 	private Game game;
@@ -23,8 +26,11 @@ public class LoppuController {
     @FXML
     private Label winnerLabel;
     
+    /*
+     * Informs players who won.
+     */
     public void initialize(){
-    	GameHolder holder=GameHolder.getInstance();
+    	GameHolder holder=GameHolder.getInstance(); //Load game data from GameHolder
 		game=holder.getGame();
 		
     	if(game.player1turn) {
@@ -35,10 +41,13 @@ public class LoppuController {
     	}
     }
 
+    /*
+     * Starts a new game and loads Laivanupotus_aloitusnaytto_1.fxml.
+     */
     @FXML
     void NewGame(ActionEvent event) {
-    	Node node = (Node) event.getSource(); // Tallennetaan nappi muuttujaan node
-    	Stage stage = (Stage) node.getScene().getWindow(); // Haetaan napin scene ja Scenen ikkuna eli Stage-> tallennetaan stage
+    	Node node = (Node) event.getSource();
+    	Stage stage = (Stage) node.getScene().getWindow();
 		Parent root;
 		
 		try {
@@ -49,14 +58,17 @@ public class LoppuController {
 			return;
 		}
 		Scene scene= new Scene(root);
-		stage.setScene(scene); // asetetaan uusi Scene
-		stage.show(); // näytetään uusi scene 
+		stage.setScene(scene);
+		stage.show();
 	}
 
+    /*
+     * Quits the game and closes the game window.
+     */
     @FXML
     void Quit(ActionEvent event) {
-    	Node node = (Node) event.getSource(); //Tallennetaan nappi muuttujaan node
-    	Stage stage = (Stage) node.getScene().getWindow(); //Haetaan napin scen ja Scenen ikkuna eli Stage -> tallennetaan stage
+    	Node node = (Node) event.getSource();
+    	Stage stage = (Stage) node.getScene().getWindow();
     	stage.close();
     }
 

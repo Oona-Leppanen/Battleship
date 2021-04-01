@@ -29,6 +29,9 @@ import javafx.stage.Stage;
 import javafx.scene.input.DataFormat;
 import javafx.scene.input.DragEvent;
 
+/*
+ * Controls Aluksien sijainnit.fxml document and creates game board where players can place their ships.
+ */
 public class SijainnitController {
 
 	private DataFormat DRAGGABLE_SHIP_TYPE = GameHolder.getInstance().getDataFormat();
@@ -404,7 +407,7 @@ public class SijainnitController {
 	}
 
 	/*
-	 * Toggle rotate if r button is pressed.
+	 * Toggle rotate if r-button is pressed.
 	 */
 	@FXML
 	void toggleRotate(KeyEvent event) {

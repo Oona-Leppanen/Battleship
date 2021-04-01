@@ -22,6 +22,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
+/*
+ * Controls Pelinakyma.fxml and handles gameplay, such as shooting.
+ */
 public class PelinakymaController {
 
 	private Game game;
@@ -295,7 +298,10 @@ public class PelinakymaController {
 	}
 
 	/*
-	 * Method for shooting.
+	 * Method for shooting. Checks first if the shot was a hit or a miss 
+	 * followed by a for-loop to check which ship has been hit.
+	 * If the hit ship has taken enough hits sink the ship.
+	 * Finally check if the game has ended.
 	 */
 	void shoot(Board board, MouseEvent clickEvent) {
 		ImageView target= (ImageView) clickEvent.getSource();

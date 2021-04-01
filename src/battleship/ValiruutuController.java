@@ -10,6 +10,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+/*
+ * Controls Valiruutu.fxml and tells players who's turn is next.
+ */
 public class ValiruutuController {
 	
 	private Game game;
@@ -20,8 +23,11 @@ public class ValiruutuController {
     @FXML
     private Label nextTurn;
     
+    /*
+     * Informs players who's turn is next.
+     */
     public void initialize(){
-    	GameHolder holder=GameHolder.getInstance();
+    	GameHolder holder=GameHolder.getInstance(); //Load game data from GameHolder
 		game=holder.getGame();
 		
     	if(game.player1turn) {
@@ -32,10 +38,13 @@ public class ValiruutuController {
     	}
     }
 
+    /*
+     * Moves to Pelinakyma.
+     */
     @FXML
     void Continue(ActionEvent event) {
-    	Node node = (Node) event.getSource(); // Tallennetaan nappi muuttujaan node
-    	Stage stage = (Stage) node.getScene().getWindow(); // Haetaan napin scene ja Scenen ikkuna eli Stage-> tallennetaan stage
+    	Node node = (Node) event.getSource();
+    	Stage stage = (Stage) node.getScene().getWindow();
 		Parent root;
 		
 		try {
@@ -46,7 +55,7 @@ public class ValiruutuController {
 			return;
 		}
 		Scene scene= new Scene(root);
-		stage.setScene(scene); // asetetaan uusi Scene
-		stage.show(); // näytetään uusi scene
+		stage.setScene(scene);
+		stage.show();
 	}
 }
