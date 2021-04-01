@@ -11,6 +11,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+/*
+ * Controls Laivanupotus_aloitusnaytto_2 and sets relevant data for the game object.
+ */
 public class Aloitus2Controller {
 
 	private Game game;
@@ -61,7 +64,9 @@ public class Aloitus2Controller {
 	}
 	
     /*
-     * Check that each ship combo box has a chosen value. If true, enable confirm button
+     * Check that each ship combo box has a chosen value.
+     * Inform player whether their current selections comply with battleship game rules or not.
+     * If both checks are met, enable the continue button.
      */
 	@FXML
 	void checkValue(ActionEvent event) {
@@ -109,7 +114,7 @@ public class Aloitus2Controller {
 	}
 
 	/*
-	 * Continue to ship placement and save ship amounts to game-class.
+	 * Continue to ship placement and save ship amounts to game-object.
 	 */
 	@FXML
 	void Confirm(ActionEvent event) {

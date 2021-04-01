@@ -60,7 +60,7 @@ public class Board {
 
 /*
  * willFit() -method is an important checker method for the functions of the game logic. It gets parameters of a ship and x and y
- * coordinates.	It will treat the x and y coordinates as the starting square of the ship. and compare it through the board to see
+ * coordinates.	It will treat the x and y coordinates as the starting square of the ship and compare it through the board to see
  * if it will fit according to the rules of Battleship.
  */
 	

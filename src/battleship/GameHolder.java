@@ -2,6 +2,11 @@ package battleship;
 
 import javafx.scene.input.DataFormat;
 
+/*
+ * A holder class that is used for saving and loading game data. Required for passing game data between controller classes.
+ * Also holds a DataFormat object for Drag and Drop in SijainnitController.
+ * Inspiration from https://dev.to/devtony101/javafx-3-ways-of-passing-information-between-scenes-1bm8
+ */
 public final class GameHolder {
 	  
 	  private Game game;

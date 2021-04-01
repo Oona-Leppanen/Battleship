@@ -11,6 +11,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/*
+ * Controls Laivanupotus_aloitusnaytto_1.fxml and initializes the game object.
+ */
 public class Aloitus1Controller {
 
     @FXML

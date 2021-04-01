@@ -1,5 +1,8 @@
 package battleship;
 
+/*
+ * Game-class is used for holding data that is required to be communicated between controller classes.
+ */
 public class Game {
     String player1;
     String player2;
@@ -23,7 +26,9 @@ public class Game {
         this.player1=player1;
         this.player2=player2;
     }
-    
+    /*
+     * Sets ship amounts
+     */
     public void setShips(int d, int s, int cr, int b, int c){
     	this.destroyers = d;
     	this.submarines = s;
