@@ -36,6 +36,9 @@ public class Aloitus1Controller {
     	}
     }
     
+    /*
+     * Check that game board size has been set. If true, enable next button
+     */
     @FXML
     void checkValue(ActionEvent event) {
     	if(widthChooser.getValue()!=null && heightChooser.getValue()!=null) {
@@ -43,13 +46,14 @@ public class Aloitus1Controller {
     	}
     }
     
-    //Game initialization and next GUI screen transition
+    /*
+     * Game class initialization, saving game to GameHolder class and next GUI screen transition
+     */
     @FXML
     void ButtonPressed(ActionEvent event) {
     	Game game=new Game(p1Input.getText(), p2Input.getText(), widthChooser.getValue(), heightChooser.getValue());
-    	System.out.println(widthChooser.getValue()+","+heightChooser.getValue());
-    	Node node = (Node) event.getSource(); // Tallennetaan nappi muuttujaan node
-    	Stage stage = (Stage) node.getScene().getWindow(); // Haetaan napin scene ja Scenen ikkuna eli Stage-> tallennetaan stage
+    	Node node = (Node) event.getSource();
+    	Stage stage = (Stage) node.getScene().getWindow();
 		Parent root;
 	    GameHolder holder = GameHolder.getInstance();
 	    holder.setGame(game);
@@ -62,7 +66,7 @@ public class Aloitus1Controller {
 			return;
 		}
 		Scene scene= new Scene(root);
-		stage.setScene(scene); // asetetaan uusi Scene
-		stage.show(); // näytetään uusi scene
+		stage.setScene(scene);
+		stage.show();
 	}
 }

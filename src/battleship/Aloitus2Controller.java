@@ -39,7 +39,7 @@ public class Aloitus2Controller {
 	private Button confirmButton;
 
 	public void initialize() {
-		GameHolder holder=GameHolder.getInstance();
+		GameHolder holder=GameHolder.getInstance(); //Load game data from GameHolder
 		game= holder.getGame();
 		confirmButton.setDisable(true);
 		for(int i=0; i<6; i++) {
@@ -59,7 +59,10 @@ public class Aloitus2Controller {
 		}
 
 	}
-
+	
+    /*
+     * Check that each ship combo box has a chosen value. If true, enable confirm button
+     */
 	@FXML
 	void checkValue(ActionEvent event) {
 		alertLabel.setText("Choose a number for each ship");
@@ -69,28 +72,28 @@ public class Aloitus2Controller {
 			int ships= destroyerAmount.getValue()*2+submarineAmount.getValue()*3+cruiserAmount.getValue()*3+battleshipAmount.getValue()*4+carrierAmount.getValue()*5;
 			if(area>2*ships && (destroyerAmount.getValue()>=1 || submarineAmount.getValue()>=1 || cruiserAmount.getValue()>=1 || battleshipAmount.getValue()>=1 || carrierAmount.getValue()>=1)) {
 				confirmButton.setDisable(false);
-				System.out.println("area");
 				alertLabel.setText("");
 			}
 
 			else if(area>2*ships && destroyerAmount.getValue()==0 && submarineAmount.getValue()==0 && cruiserAmount.getValue()==0 && battleshipAmount.getValue()==0 && carrierAmount.getValue()==0) {
 				confirmButton.setDisable(true);
-				System.out.println("area");
 				alertLabel.setText("Choose at least one ship");
 			}
 
 			else if(area<=2*ships){
 				confirmButton.setDisable(true);
-				System.out.println("ships");
 				alertLabel.setText("Too many ships");
 			}
 		}
 	}
 
+	/*
+	 * Return to Laivanupotus_aloitusnaytto_1.
+	 */
 	@FXML
 	void Back(ActionEvent event) {
-		Node node = (Node) event.getSource(); // Tallennetaan nappi muuttujaan node
-		Stage stage = (Stage) node.getScene().getWindow(); // Haetaan napin scene ja Scenen ikkuna eli Stage-> tallennetaan stage
+		Node node = (Node) event.getSource();
+		Stage stage = (Stage) node.getScene().getWindow();
 		Parent root;
 
 		try {
@@ -101,14 +104,17 @@ public class Aloitus2Controller {
 			return;
 		}
 		Scene scene= new Scene(root);
-		stage.setScene(scene); // asetetaan uusi Scene
-		stage.show(); // näytetään uusi scene
+		stage.setScene(scene);
+		stage.show();
 	}
 
+	/*
+	 * Continue to ship placement and save ship amounts to game-class.
+	 */
 	@FXML
 	void Confirm(ActionEvent event) {
-		Node node = (Node) event.getSource(); // Tallennetaan nappi muuttujaan node
-		Stage stage = (Stage) node.getScene().getWindow(); // Haetaan napin scene ja Scenen ikkuna eli Stage-> tallennetaan stage
+		Node node = (Node) event.getSource();
+		Stage stage = (Stage) node.getScene().getWindow();
 		Parent root;
 		game.setShips(destroyerAmount.getValue(), submarineAmount.getValue(), cruiserAmount.getValue(), battleshipAmount.getValue(), carrierAmount.getValue());
 		try {
@@ -119,8 +125,8 @@ public class Aloitus2Controller {
 			return;
 		}
 		Scene scene= new Scene(root);
-		stage.setScene(scene); // asetetaan uusi Scene
-		stage.show(); // näytetään uusi scene
+		stage.setScene(scene);
+		stage.show();
 	}
 	public void setGame(Game game) {
 		this.game=game;
