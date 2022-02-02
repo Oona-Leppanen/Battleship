@@ -1,4 +1,4 @@
-# Harjoitustyö D - Laivanupotus
+# Battleship
 
 ## **Työn tekijät**
 ###### Joona Helenius    joalhel@utu.fi
